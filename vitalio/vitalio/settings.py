@@ -83,12 +83,12 @@ WSGI_APPLICATION = 'vitalio.wsgi.application'
 # }
 DATABASES = {
     "default": {
-        "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
-        "NAME": os.environ.get("SQL_DATABASE", os.path.join(BASE_DIR, "db.sqlite3")),
-        "USER": os.environ.get("SQL_USER", "postgres"),
-        "PASSWORD": os.environ.get("SQL_PASSWORD", "postgres"),
-        "HOST": os.environ.get("SQL_HOST", "localhost"),
-        "PORT": os.environ.get("SQL_PORT", "5432"),
+        "ENGINE": "django.db.backends.postgresl",
+        "NAME": "dbadmin",
+        "USER": "dbadmin",
+        "PASSWORD": "vitalio2021",
+        "HOST": "localhost",
+        "PORT": "5432"
     }
 }
 
@@ -146,3 +146,8 @@ ROLEPERMISSIONS_MODULE = 'vitalio.roles'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
