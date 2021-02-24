@@ -102,11 +102,3 @@ class TestModels(TestCase):
         onboard = Onboard.objects.get(account=account)
 
         self.assertEqual(str(onboard), "False")
-
-    def test_schedule_model_str(self):
-        # Come back to this
-        pass
-    
-    def test_booking_model_str(self):
-        # Come back to this
-        pass
