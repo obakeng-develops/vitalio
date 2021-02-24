@@ -12,7 +12,7 @@ from twilio.jwt.access_token import AccessToken
 from twilio.jwt.access_token.grants import VideoGrant
 
 # Twilio Account Values
-account_sid = os.environ['TWILIO_ACCOUNT_SID']
+account_sid = os.environ.get('TWILIO_ACCOUNT_SID')
 auth_token = os.environ['TWILIO_AUTH_TOKEN']
 api_key_sid = os.environ['TWILIO_API_KEY_SID']
 api_key_secret = os.environ['TWILIO_API_KEY_SECRET']
