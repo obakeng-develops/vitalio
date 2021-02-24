@@ -1,0 +1,75 @@
+{% extends 'provider/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} {{ profile.first_name }}'s Profile {% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center my-5">
+
+        <div class="col-md-3">
+            <div class="nav card shadow-sm px-2 py-2 flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Your Profile</a>
+                <a class="nav-link" id="v-pills-password-tab" data-toggle="pill" href="#v-pills-password" role="tab" aria-controls="v-pills-password" aria-selected="false">Password</a>
+            </div>
+        </div>
+
+        <div class="col-md-7">
+            <div class="tab-content" id="v-pills-tabContent">
+                <!-- start of profile tab -->
+                <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                    <div class="card shadow px-4 py-4">
+                        <div class="media">
+                            <img src="..." class="mr-3" alt="...">
+                            <div class="media-body">
+                                <div class="custom-file custom-file-naked d-block mb-1">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                    </div>
+                                </div>
+                                <small>For best results, use an image at least 256px by 256px in either .jpg or .png format</small>
+                                <hr>
+                                {{ form|crispy }}
+                                <button class="btn btn-primary">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end of profile tab -->
+                <!-- start of password tab -->
+                <div class="tab-pane fade" id="v-pills-password" role="tabpanel" aria-labelledby="v-pills-password-tab">
+                    <form>
+                        <div class="card shadow-sm px-4 py-4">
+                            <div class="form-group row align-items-center">
+                                <label class="col-3">Current Password</label>
+                                <div class="col">
+                                    <input type="password" placeholder="Enter your current password" name="password-current" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group row align-items-center">
+                                <label class="col-3">New Password</label>
+                                <div class="col">
+                                    <input type="password" placeholder="Enter a new password" name="password-new" class="form-control">
+                                    <small>Password must be at least 8 characters long</small>
+                                </div>
+                            </div>
+                            <div class="form-group row align-items-center">
+                                <label class="col-3">Confirm Password</label>
+                                <div class="col">
+                                    <input type="password" placeholder="Confirm your new password" name="password-new-confirm" class="form-control">
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary">Change Password</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- end of password tab -->
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

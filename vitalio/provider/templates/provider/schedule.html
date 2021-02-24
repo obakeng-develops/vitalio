@@ -1,0 +1,20 @@
+{% extends 'provider/base.html' %}
+
+{% block title %} {% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center my-5">
+        <div class="col-md-10">
+            <div class="card px-4 py-4 shadow">
+                <div class="clearfix">
+                    <a class="btn btn-info left mr-2" href="{% url 'add_schedule' %}"> Add a timeslot </a>
+                    <a class="btn btn-info left" href="{% url 'provider_schedule' %}?{{ prev_month }}"> Previous Month </a>
+                    <a class="btn btn-info right" href="{% url 'provider_schedule' %}?{{ next_month }}"> Next Month </a>
+                </div>
+                {{calendar}}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

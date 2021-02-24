@@ -1,0 +1,38 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block title %} About Us {% endblock %}
+
+{% block content %}
+<section class="container-fluid">
+    <div class="row justify-content-center my-4 py-4">
+        <div class="col-md-8">
+            <h1 class="display-4">Our Mission</h1>
+            <p class="lead">Our mission is simple, to democratize healthcare.</p>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="display-4">Meet The Team</h1>
+            <p class="lead">These are the people behind the mission.</p>
+            <div class="d-flex">
+                <div class="team border d-flex flex-column">
+                    <img src="{% static 'images/face.jpg' %}" width='150' height='150'>
+                    <label class="lead text-center">Obakeng Mosadi</label>
+                    <label class="text-center">Co-Founder, CEO</label>
+                </div>
+                <div class="team border d-flex mx-5 flex-column">
+                    <img src="{% static 'images/face.jpg' %}" width='150' height='150'>
+                    <label class="lead text-center">Pat Lukele</label>
+                    <label class="text-center">Co-Founder, COO</label>
+                </div>
+                <div class="team border d-flex flex-column">
+                    <img src="{% static 'images/face.jpg' %}" width='150' height='150'>
+                    <label class="lead text-center">Lena-Mari Josling</label>
+                    <label class="text-center">Industrial Psychologist, Supervisor</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

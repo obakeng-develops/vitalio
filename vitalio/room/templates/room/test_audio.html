@@ -1,0 +1,36 @@
+{% extends 'room/base.html' %}
+{% load permission_tags %}
+{% load static %}
+
+{% block title %} Test your audio and video {% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center my-5">
+        <div class="col-md-6 my-5">
+            {% if user|has_role:'provider' %}
+            <a href="{% url 'provider_dashboard' %}" class="btn btn-primary">Go Back</a>
+            {% else %}
+            <a href="{% url 'member_dashboard' %}" class="btn btn-primary">Go Back</a>
+            {% endif %}
+
+            <div class="test d-flex">
+                <div id="meters" class="audio border border-dark my-5 bg-light">
+                    <div id="instant">
+                        <meter high="0.25" class="form-control form-control-lg" max="1" value="0"></meter>
+                        <div class="value"></div>
+                    </div>
+                    <button type="button" class="btn btn-success mt-5 mx-2" id="startButton">Start</button> 
+                    <button type="button" class="btn btn-success mt-5" id="stopButton" disabled>Stop</button>
+                </div>
+            </div>
+
+            <a href="{% url 'test_video' %}" class="btn btn-primary">Continue</a>
+        </div>
+    </div>
+</div>
+
+<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+<script src="{% static 'js/soundmeter.js' %}"></script>
+<script src="{% static 'js/audio.js' %}" async></script>
+{% endblock %}

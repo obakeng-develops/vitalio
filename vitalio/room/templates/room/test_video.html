@@ -1,0 +1,28 @@
+{% extends 'room/base.html' %}
+{% load permission_tags %}
+{% load static %}
+
+{% block title %} Test your audio and video {% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center my-5">
+        <div class="col-md-6 my-5">
+            <a href="{% url 'test_audio' %}" class="btn btn-primary">Go Back</a>
+
+            <div class="test">
+                <div class="video border border-dark mx-4 my-5">
+                    <video id="gum-local" autoplay playsinline></video>
+                </div>
+                <button id="showVideo" class="btn btn-primary mt-3 mx-2">Open camera</button>
+
+                <a href="{% url 'room' %}" class="btn btn-primary mt-3" id="continueButton">Continue</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+<script src="{% static 'js/soundmeter.js' %}"></script>
+<script src="{% static 'js/video.js' %}" async></script>
+{% endblock %}

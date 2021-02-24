@@ -1,0 +1,83 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block title %} Vitalio {% endblock %}
+
+{% block content %}
+<section class="container-fluid">
+    <div class="row justify-content-center my-5 py-5">
+        <div class="col-md-10">
+            <div class="my-5">
+                <h1 class="display-3">Make the workplace psychologically safe again.</h1>
+                <p class="lead">Vitalio is an ongoing, proactive telehealth platform that allows employees access to healthcare
+                    services on their mobile or the web.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container-fluid">
+    <div class="row justify-content-center my-5 py-5">
+        <div class="col-md-10">
+            <h2 class="text-center">Big Business Benefits</h2>
+            <div class="row my-5 justify-content-center">
+                <div class="col-md-6 d-flex justify-content-center align-items-center">
+                    <div>
+                        <h3 class="">Happy employees, happy business.</h3>
+                        <p class="lead">Reduce absenteeism, manage workplace stress and improve productivity.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex justify-content-center align-items-center">
+                    <img src="{% static 'images/Croods - Party Time.png' %}" width='550' height='390'>
+                </div>
+            </div>
+            <div class="row my-5 justify-content-center">
+                <div class="col-md-6 d-flex justify-content-center align-items-center">
+                    <img src="{% static 'images/Hands-Give.png' %}" width='480' height='320'>
+                </div>
+                <div class="col-md-6 d-flex justify-content-center align-items-center">
+                    <div>
+                        <h3 class="">Save medical costs.</h3>
+                        <p class="lead">Reduce medical aid spend on medication and other drug-related costs.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row my-5 justify-content-center">
+                <div class="col-md-6 d-flex justify-content-center align-items-center">
+                    <div>
+                        <h3 class="">Convenient access to healthcare.</h3>
+                        <p class="lead">Allow employees to conveniently access our virtual clinic on their phone or on the web.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex justify-content-center align-items-center">
+                    <img src="{% static 'images/Humaaans - 3 Characters.png' %}" width='550' height='390'>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow my-5">
+                <div class="row px-5 py-5">
+                    <div class="col-md-6">
+                        <h2>A virtual clinic, close to you.</h2>
+                        <p class="lead">Get access to a psychologist or counsellor on the web or on your mobile.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Access to a psychologist/counsellor.</li>
+                            <li class="list-group-item">Book a convenient timeslot.</li>
+                            <li class="list-group-item">12/20 sessions a month.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

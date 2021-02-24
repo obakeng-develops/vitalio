@@ -1,0 +1,42 @@
+{% extends 'provider/base.html' %}
+
+{% block title %} Dashboard {% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center my-5">
+        <div class="col-md-5">
+            <h1 class="display-4">Welcome, {{ profile.first_name }}.</h1>
+            <p class="lead">It's good to see you again.</p>
+            <a href="{% url 'provider_schedule' %}" class="btn btn-success">Create Schedule</a>
+
+            <div class="card shadow-sm my-5">
+                <div class="card-header bg-white">Bookings</div>
+                <div class="card-body">
+                    {% for booking in bookings %}
+                    <div class="media">
+                        <div class="media-body">
+                          <h6 class="mt-0">You have a booking with {{ booking.patient }} on {{ booking.timeslot.day }} at {{ booking.timeslot.start_time }}</h6>
+                          {% if booking.isAccepted == False %}
+                            <form method="POST" action="{% url 'accept_booking' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="booking_id" value="{{ booking.pk }}">
+                                <button class="btn btn-primary">Accept booking</button>
+                            </form>
+                          {% else %}
+                            <form method="POST" action="{% url 'test_audio' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="booking_code" value="{{ booking.room_code }}">
+                                <button class='btn btn-danger' href="{% url 'test_audio' %}" type="submit">Join Room</button>
+                            </form>
+                          {% endif %}
+                          <hr>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

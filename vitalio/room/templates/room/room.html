@@ -1,0 +1,102 @@
+{% extends 'room/base.html' %}
+{% load permission_tags %}
+
+{% block title %} {{ room }} {% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center my-5 py-5">
+        <div class="col-md-5">
+            <div class="local-participant" id="local-participant">
+                <!-- Add local participant here -->
+            </div>
+            {% if user|has_role:'provider' %}
+            <form method="POST" action="{% url 'leave_call_provider' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger my-3 w-25 shadow-sm">Leave call</button>
+            </form>
+            {% else %}
+            <form method="POST" action="{% url 'leave_call_member' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger my-3 w-25 shadow-sm">Leave call</button>
+            </form>
+            {% endif %}
+        </div>
+        <div class="col-md-5 ml-4">
+            <div class="remote-participant" id="remote-participant">
+                <!-- Add remote participant here -->
+            </div>
+            <button class="btn btn-danger my-3 w-25 shadow-sm">Leave call</button>
+        </div>
+    </div>
+</div>
+
+<!-- JS -->
+<script src="//media.twiliocdn.com/sdk/js/video/releases/2.8.0/twilio-video.min.js"></script>
+<script>
+    const token = "{{ token }}"
+    const identity = "{{ identity }}"
+    const roomName = "{{ roomName }}"
+
+    console.log(roomName)
+
+    function addLocalVideo() {
+        Twilio.Video.createLocalVideoTrack().then(track => {
+            let video = document.getElementById('local-participant');
+            video.appendChild(track.attach());
+        });
+    };
+
+    addLocalVideo();
+
+    function joinRoom() {
+        Twilio.Video.createLocalTracks({
+            audio: true,
+            video: { width: 550 }
+            }).then(localTracks => {
+                return Twilio.Video.connect(token, {
+                name: roomName,
+                tracks: localTracks
+            });
+        }).then(room => {
+            console.log(`Connected to Room: ${room.name}`);
+
+            // Log your Client's LocalParticipant in the Room
+            const localParticipant = room.localParticipant;
+            console.log(`Connected to the Room as LocalParticipant "${localParticipant.identity}"`);
+
+            room.participants.forEach(participant => {
+                participant.tracks.forEach(publication => {
+                    if (publication.track) {
+                    document.getElementById('remote-participant').appendChild(publication.track.attach());
+                    }
+                });
+
+                participant.on('trackSubscribed', track => {
+                    document.getElementById('remote-participant').appendChild(track.attach());
+                });
+            });
+
+
+            // Connected Participants
+            room.on('participantConnected', participant => {
+                console.log(`Participant "${participant.identity}" connected`);
+
+                participant.tracks.forEach(publication => {
+                    if (publication.isSubscribed) {
+                    const track = publication.track;
+                    document.getElementById('remote-participant').appendChild(track.attach());
+                    }
+                });
+
+                participant.on('trackSubscribed', track => {
+                    document.getElementById('remote-participant').appendChild(track.attach());
+                });
+            });
+
+        });
+    }
+
+    joinRoom();
+</script>
+{% endblock %}
