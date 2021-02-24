@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'vitalio.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "dbadmin",
+        "NAME": "vitalio_prod",
         "USER": "dbadmin",
         "PASSWORD": "vitalio2021",
         "HOST": "localhost",
