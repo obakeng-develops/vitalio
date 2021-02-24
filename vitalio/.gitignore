@@ -2,3 +2,4 @@ vitalio/.env
 static
 media
 virtualenv
+db.sqlite3
