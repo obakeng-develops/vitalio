@@ -28,4 +28,4 @@ class AccountCompany(m.Model):
     user = m.ForeignKey(Account, on_delete=m.CASCADE, related_name="user_company")
 
     def __str__(self):
-        return self.user + " from " + self.company
+        return self.user.email + " from " + self.company.company_name
