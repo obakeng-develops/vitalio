@@ -1,6 +1,9 @@
 # Django
 from django.db import models as m
 
+# Models
+from account.models import Account
+
 class Company(m.Model):
     company_name = m.CharField(max_length=50, blank=False)
     company_size = m.IntegerField()
@@ -22,7 +25,7 @@ class Location(m.Model):
 
 class AccountCompany(m.Model):
     company = m.ForeignKey(Company, on_delete=m.CASCADE, related_name="company_account")
-    user = m.ForeignKey(Company, on_delete=m.CASCADE, related_name="user_company")
+    user = m.ForeignKey(Account, on_delete=m.CASCADE, related_name="user_company")
 
     def __str__(self):
         return self.user + " from " + self.company
