@@ -1,6 +1,6 @@
 vitalio/.env
 static
 media
-virtualenv/
+virtualenv
 db.sqlite3
 *.pyc
