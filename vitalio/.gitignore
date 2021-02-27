@@ -3,3 +3,4 @@ static
 media
 virtualenv/
 db.sqlite3
+*.pyc
