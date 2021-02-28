@@ -19,7 +19,7 @@ SECRET_KEY = "qmzscr^7-gj80(z4=tvmrurs67t04me$wy*&ujh7axq!hj7d+s"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["46.101.5.94", "vitalio.co", "www.vitalio.co"]
 
 # Application definition
 
