@@ -1,0 +1,62 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block title %} Pricing {% endblock %}
+
+{% block content %}
+<section class="container-fluid">
+    <div class="row justify-content-center my-5">
+        <div class="col-md-5">
+            <div class="card shadow-sm">
+                <div class="card-header">Tell us a bit more about your company and we can send you a quote</div>
+                <div class="card-body font-montserrat">
+                    <form>
+                        <div class="form-group">
+                          <input type="text" class="form-control form-control-lg" placeholder="First name">
+                        </div>
+                        <div class="form-group">
+                          <input type="text" class="form-control form-control-lg" placeholder="Company">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control-lg" placeholder="Number of employees">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control form-control-lg" placeholder="Email">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Request Quote</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container-fluid">
+    <div class="row justify-content-center my-5">
+        <h1 class="text-center my-4 py-3">Pick what works best for your employees.</h1>
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-header">Lite</div>
+                <div class="card-body">
+                    <ul class="list-group font-montserrat list-group-flush">
+                        <li class="list-group-item">12 sessions a month per user</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-header">Premium</div>
+                <div class="card-body">
+                    <ul class="list-group font-montserrat list-group-flush">
+                        <li class="list-group-item">20 sessions a month per user</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include 'pages/footer.html' %}
+
+{% endblock %}

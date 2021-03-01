@@ -6,3 +6,6 @@ def home(request):
 
 def about(request):
     return render(request, "pages/about.html")
+
+def pricing(request):
+    return render(request, "pages/pricing.html")
