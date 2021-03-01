@@ -1,0 +1,19 @@
+{% extends 'onboard/base.html' %}
+
+{% block title %} Welcome to Onboarding {% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center my-5">
+        <div class="col-md-5 my-5 py-5">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white text-center">Welcome to Vitalio! | Step 1 of 3</div>
+                <div class="card-body">
+                    <h6>Let's start you off by setting up your profile and then you're done.</h6>
+                </div>
+            </div>
+            <a href="{% url 'onboard_admin_profile' %}"><button class="btn btn-primary my-3">Start</button></a>
+        </div>
+    </div>
+</div>
+{% endblock %}
