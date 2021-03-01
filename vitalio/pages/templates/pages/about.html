@@ -15,24 +15,26 @@
         <div class="col-md-8">
             <h1 class="display-4">Meet The Team</h1>
             <p class="lead">These are the people behind the mission.</p>
-            <div class="d-flex">
-                <div class="team border d-flex flex-column">
-                    <img src="{% static 'images/face.jpg' %}" width='150' height='150'>
-                    <label class="lead text-center">Obakeng Mosadi</label>
-                    <label class="text-center">Co-Founder, CEO</label>
+            <div class="card-deck">
+                <div class="card">
+                  <img class="card-img-top" src="{% static 'images/face.jpg' %}" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title font-montserrat">Obakeng Mosadi</h5>
+                    <p class="card-text font-montserrat">Co-Founder, CEO</p>
+                  </div>
                 </div>
-                <div class="team border d-flex mx-5 flex-column">
-                    <img src="{% static 'images/face.jpg' %}" width='150' height='150'>
-                    <label class="lead text-center">Pat Lukele</label>
-                    <label class="text-center">Co-Founder, COO</label>
-                </div>
-                <div class="team border d-flex flex-column">
-                    <img src="{% static 'images/face.jpg' %}" width='150' height='150'>
-                    <label class="lead text-center">Lena-Mari Josling</label>
-                    <label class="text-center">Industrial Psychologist, Supervisor</label>
+                <div class="card">
+                  <img class="card-img-top" src="{% static 'images/face.jpg' %}" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title font-montserrat">Pat Lukele</h5>
+                    <p class="card-text font-montserrat">Co-Founder, COO</p>
+                  </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+{% include 'pages/footer.html' %}
+
 {% endblock %}
