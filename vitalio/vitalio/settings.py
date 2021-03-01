@@ -19,7 +19,7 @@ SECRET_KEY = "qmzscr^7-gj80(z4=tvmrurs67t04me$wy*&ujh7axq!hj7d+s"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["46.101.5.94", "vitalio.co", "www.vitalio.co"]
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -75,21 +75,21 @@ WSGI_APPLICATION = 'vitalio.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "vitalio_prod",
-        "USER": "dbadmin",
-        "PASSWORD": "vitalio@db2021!",
-        "HOST": "localhost",
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "vitalio_prod",
+#         "USER": "dbadmin",
+#         "PASSWORD": "vitalio@db2021!",
+#         "HOST": "localhost",
+#     }
+# }
 
 
 # Password validation
@@ -146,7 +146,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
-try:
-    from .local_settings import *
-except ImportError:
-    pass
+# try:
+#     from .local_settings import *
+# except ImportError:
+#     pass
