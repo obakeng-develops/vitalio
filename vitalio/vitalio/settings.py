@@ -14,12 +14,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "qmzscr^7-gj80(z4=tvmrurs67t04me$wy*&ujh7axq!hj7d+s"
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get("DEBUG")
 
-ALLOWED_HOSTS = ["46.101.5.94", "vitalio.co", "www.vitalio.co"]
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
 # Application definition
 
@@ -75,21 +75,21 @@ WSGI_APPLICATION = 'vitalio.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "vitalio_prod",
-        "USER": "dbadmin",
-        "PASSWORD": "vitalio@db2021!",
-        "HOST": "localhost",
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "vitalio_prod",
+#         "USER": "dbadmin",
+#         "PASSWORD": "vitalio@db2021!",
+#         "HOST": "localhost",
+#     }
+# }
 
 
 # Password validation
@@ -145,8 +145,3 @@ ROLEPERMISSIONS_MODULE = 'vitalio.roles'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-
-try:
-    from .local_settings import *
-except ImportError:
-    pass
