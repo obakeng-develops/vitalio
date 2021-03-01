@@ -11,6 +11,7 @@ from .forms import AccountCreationForm
 # Models
 from .models import Account
 from onboard.models import Onboard
+from company.models import Company, AccountCompany
 
 # Third Party
 from rolepermissions.roles import assign_role
@@ -80,8 +81,27 @@ def register_admin(request):
 
             return redirect(reverse("thank_you"))
 
+def register_company_member(request):
+
+    if request.POST:
+
+        company_id = request.POST["company"]
+        request.session["company"] = company_id
+
+        return redirect(reverse("register_member"))
+
+    else:
+        companies = Company.objects.all()
+
+        context = {
+            "companies": companies
+        }
+
+    return render(request, "account/register_member_company.html", context)
+
 @transaction.atomic
 def register_member(request):
+
     if request.method == "GET":
         return render(
             request, "account/register_member.html",
@@ -98,6 +118,12 @@ def register_member(request):
             # Create New Account
             user = Account.objects.create_user(email=email, password=password1, user_type='1')
             user.save()
+
+            # Add to company
+            account_company = AccountCompany()
+            account_company.company = Company.objects.get(pk=request.session["company"])
+            account_company.user = user
+            account_company.save()
 
             assign_role(user, 'member')
 

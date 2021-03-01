@@ -31,7 +31,7 @@ def member_dashboard(request):
 
     schedules = Schedule.objects.filter(isBooked=False)
 
-    bookings = Booking.objects.filter(patient=request.user)
+    bookings = Booking.objects.filter(patient=request.user, isEnded=False)
 
     context = {
         "profile": profile,
@@ -58,8 +58,11 @@ def member_profile(request):
 
         form = ProfileForm(instance=request.user)
 
+        profile = Profile.objects.get(account=request.user)
+
         context = {
             "form": form,
+            "profile": profile
         }    
 
     return render(request, "member/profile.html", context)

@@ -42,6 +42,7 @@ class Booking(m.Model):
     timeslot = m.ForeignKey(Schedule, on_delete=m.CASCADE, related_name="provider_timeslot")
     room_code = m.CharField(max_length=20, default=generate_room_code, null=True, unique=True)
     isAccepted = m.BooleanField(default=False)
+    isEnded = m.BooleanField(default=False)
 
     def __str__(self):
         return self.room_code

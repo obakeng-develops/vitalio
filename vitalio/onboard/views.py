@@ -10,6 +10,7 @@ from company.forms import CompanyForm
 # Models 
 from .models import Onboard
 from account.models import Profile
+from company.models import Company, AccountCompany
 
 def onboard_member(request):
     return render(request, "onboard/member/hello.html")
@@ -71,7 +72,7 @@ def onboard_admin_profile(request):
             "form": form
         }
 
-    return render(request, "onboard/admin/profile.html")
+    return render(request, "onboard/admin/profile.html", context)
 
 @transaction.atomic
 def onboard_admin_company(request):
@@ -87,10 +88,16 @@ def onboard_admin_company(request):
             onboard.save()
 
             # Update their profile
-            company = CompanyForm()
+            company = Company()
             company.company_name = form.cleaned_data["company_name"]
             company.company_size = form.cleaned_data["company_size"]
             company.save()
+
+            # Add user as part of a company
+            account_company = AccountCompany()
+            account_company.company = company
+            account_company.user = request.user
+            account_company.save()
 
             # Say thank you
             return redirect(reverse("member_dashboard"))
@@ -102,7 +109,7 @@ def onboard_admin_company(request):
         }
 
 
-    return render(request, "onboard/admin/company.html")
+    return render(request, "onboard/admin/company.html", context)
 
 def onboard_provider(request):
     return render(request, "onboard/provider/hello.html")

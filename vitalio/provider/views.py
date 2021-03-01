@@ -160,4 +160,9 @@ def leave_call(request):
 
         room = client.video.rooms(roomcode).update(status='completed')
 
+        # End the booking
+        booking = Booking.objects.get(room_code=roomcode)
+        booking.isEnded = True
+        booking.save()
+
     return redirect(reverse("provider_dashboard"))

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Welcome Member {% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center my-5 py-5">
+        <div class="col-md-5">
+            <div class="card shadow-sm px-4 py-4 mt-5">
+                <h2>Choose your company</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <select class="form-control my-3" name="company">
+                        {% for company in companies %}
+                        <option value="{{ company.pk }}">{{ company.company_name }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="submit" value="Register" class="btn btn-primary my-4">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
