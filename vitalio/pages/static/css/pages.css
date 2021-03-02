@@ -10,7 +10,20 @@ body {
     height: 150px;
 }
 
+footer {
+    background-color: #005C69;
+    color: white;
+}
+.footer-link {
+    color: white;
+}
+
 /* Font styles */
 .font-montserrat {
     font-family: 'Montserrat', sans-serif;
+}
+
+/* Hover styles */
+.nav-link:hover {
+    border-bottom: 2px solid #005C69;
 }
