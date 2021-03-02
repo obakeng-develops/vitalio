@@ -2,7 +2,7 @@
 from django.urls import include, path
 
 # Views
-from .views import login_provider, register_admin, register_member, register_company_member, register_provider, entry_point, thank_you
+from .views import login_provider, register_admin, register_member, register_company_member, register_provider, entry_point, thank_you, change_password
 
 urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")),
@@ -13,4 +13,5 @@ urlpatterns = [
     path("register/provider", register_provider, name="register_provider"),
     path("e", entry_point, name="entry_point"),
     path("thank-you", thank_you, name="thank_you"),
+    path("change-password", change_password, name="change_password")
 ]

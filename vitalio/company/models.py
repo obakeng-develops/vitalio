@@ -29,11 +29,3 @@ class AccountCompany(m.Model):
 
     def __str__(self):
         return self.user.email + " from " + self.company.company_name
-
-class StripeCustomer(m.Model):
-    user = m.OneToOneField(to=Account, on_delete=m.CASCADE)
-    stripeCustomerId = m.CharField(max_length=255)
-    stripeSubscriptionId = m.CharField(max_length=255)
-
-    def __str__(self):
-        return self.user.Profile.first_name

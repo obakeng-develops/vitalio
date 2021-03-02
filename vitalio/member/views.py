@@ -2,18 +2,24 @@
 from django.shortcuts import render, redirect, reverse
 from django.db import transaction
 from django.http import HttpResponse
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.decorators import login_required
 import os
 
 # Models
 from account.models import Account, Profile
 from provider.models import Schedule, Booking
+from company.models import Company, Location, AccountCompany
 
 # Forms
 from account.forms import ProfileForm
 from provider.forms import ScheduleForm, BookingForm
+from company.forms import CompanyForm
 
 # Third Party
 from rolepermissions.decorators import has_role_decorator
+from rolepermissions.checkers import has_role
+from vitalio.roles import Admin
 from twilio.rest import Client
 from twilio.jwt.access_token import AccessToken
 from twilio.jwt.access_token.grants import VideoGrant
@@ -41,7 +47,7 @@ def member_dashboard(request):
 
     return render(request, "member/dashboard.html", context)
 
-@csrf_exempt
+@login_required
 def member_profile(request):
 
     if request.method == 'POST':
@@ -54,20 +60,29 @@ def member_profile(request):
             profile.first_name = form.cleaned_data["first_name"]
             profile.last_name = form.cleaned_data["last_name"]
             profile.save()
+
+            return redirect(reverse('member_profile'))
     
     else:
 
         form = ProfileForm(instance=request.user)
 
+        password = PasswordChangeForm(request.user)
+
         profile = Profile.objects.get(account=request.user)
+
+        company_user = AccountCompany.objects.get(user=request.user)
 
         context = {
             "form": form,
-            "profile": profile
+            "profile": profile,
+            "password": password,
+            "company_user": company_user
         }    
 
     return render(request, "member/profile.html", context)
 
+@login_required
 @transaction.atomic
 def create_booking(request):
 
@@ -83,12 +98,12 @@ def create_booking(request):
     booking.patient = request.user
     booking.provider = schedule.account
     booking.timeslot = schedule
-    booking.room_code = '8928rgff'
     booking.isAccepted = False
     booking.save()
 
     return redirect(reverse("member_dashboard"))
 
+@login_required
 def leave_call_member(request):
 
     if request.POST:
@@ -97,9 +112,12 @@ def leave_call_member(request):
 
         client = Client(account_sid, auth_token)
 
-        room = client.video.rooms(roomcode).fetch()
+        exists = client.video.rooms.list(unique_name=roomcode)
 
-        if room.status == 'completed':
-            return redirect(reverse("member_dashboard"))
+        if exists is None:
+            return redirect('member_dashboard')
+        else:
+            participant = client.video.rooms(roomcode).participants.get(request.user.email).update(status='disconnected')
+            return redirect('member_dashboard')
     
     return redirect(reverse("member_dashboard"))

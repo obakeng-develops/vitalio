@@ -19,7 +19,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG")
 
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
+# ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -145,7 +146,3 @@ ROLEPERMISSIONS_MODULE = 'vitalio.roles'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-
-STRIPE_PUBLISHABLE_KEY = 'pk_test_51IJfIgAHYZTal1898uaPQ86LRZe3fpqFLUwd5ucYi4LoT0XGVgRiBs2Ma3etcFXbOm82q1f8Bks7ftIHYSjOQXMb00N6IL5FH6'
-STRIPE_SECRET_KEY = 'sk_test_51IJfIgAHYZTal189gczc05w0isCgnRT4tnrL9LnV9Rod42g9r4MOWEQ5Gq7j07pHkz4EBWKxHb1D90oYODLRcjTB00t42fJ7un'
-STRIPE_PRICE_ID = 'price_1IQSYkAHYZTal189MUFjNOy1'

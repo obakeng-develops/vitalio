@@ -5,12 +5,21 @@
 
 {% block content %}
 <div class="container-fluid">
-    <div class="row justify-content-center my-5 py-5">
+    <div class="row justify-content-center my-3 py-3">
         <div class="col-md-5">
             <div class="local-participant" id="local-participant">
                 <!-- Add local participant here -->
             </div>
-            {% if user|has_role:'provider' %}
+        </div>
+        <div class="col-md-5 ml-4">
+            <div class="remote-participant" id="remote-participant">
+                <!-- Add remote participant here -->
+            </div>
+        </div>
+    </div>
+    {% if user|has_role:'provider' %}
+    <div class="row justify-content-center">
+        <div class="col-md-10">
             <form method="POST" action="{% url 'leave_call_provider' %}">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-danger my-3 w-25 shadow-sm">Leave call</button>
@@ -20,15 +29,9 @@
                 {% csrf_token %}
                 <button type="submit" class="btn btn-danger my-3 w-25 shadow-sm">Leave call</button>
             </form>
-            {% endif %}
-        </div>
-        <div class="col-md-5 ml-4">
-            <div class="remote-participant" id="remote-participant">
-                <!-- Add remote participant here -->
-            </div>
-            <button class="btn btn-danger my-3 w-25 shadow-sm">Leave call</button>
         </div>
     </div>
+    {% endif %}
 </div>
 
 <!-- JS -->

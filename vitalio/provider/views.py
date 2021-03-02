@@ -4,6 +4,7 @@ from datetime import datetime, date, timedelta
 from django.views import generic
 from django.utils.safestring import mark_safe
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.forms import PasswordChangeForm
 from django.db import transaction
 import calendar
 import os
@@ -36,7 +37,7 @@ def provider_dashboard(request):
 
     profile = Profile.objects.get(account=request.user)
 
-    bookings = Booking.objects.filter(provider=request.user)
+    bookings = Booking.objects.filter(provider=request.user, isEnded=False)
 
     context = {
         "profile": profile,
@@ -64,9 +65,12 @@ def provider_profile(request):
 
         profile = Profile.objects.get(account=request.user)
 
+        password = PasswordChangeForm(request.user)
+
         context = {
             "form": form,
             "profile": profile,
+            "password": password
         }    
 
     return render(request, "provider/profile.html", context)
