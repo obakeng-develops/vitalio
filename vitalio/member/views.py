@@ -41,6 +41,7 @@ def member_dashboard(request):
 
     return render(request, "member/dashboard.html", context)
 
+@csrf_exempt
 def member_profile(request):
 
     if request.method == 'POST':
