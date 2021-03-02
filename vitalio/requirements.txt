@@ -15,6 +15,7 @@ PyJWT==1.7.1
 pytz==2021.1
 requests==2.25.1
 six==1.15.0
+stripe==2.56.0
 sqlparse==0.4.1
 twilio==6.52.0
 urllib3==1.26.3
