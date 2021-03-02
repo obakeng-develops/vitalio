@@ -148,3 +148,8 @@ ROLEPERMISSIONS_MODULE = 'vitalio.roles'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
