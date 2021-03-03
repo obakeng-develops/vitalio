@@ -117,7 +117,6 @@ def leave_call_member(request):
         if exists is None:
             return redirect('member_dashboard')
         else:
-            participant = client.video.rooms(roomcode).participants.get(request.user.email).update(status='disconnected')
             return redirect('member_dashboard')
     
     return redirect(reverse("member_dashboard"))

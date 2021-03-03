@@ -55,7 +55,7 @@
     function joinRoom() {
         Twilio.Video.createLocalTracks({
             audio: true,
-            video: { width: 550 }
+            video: { width: 640 }
             }).then(localTracks => {
                 return Twilio.Video.connect(token, {
                 name: roomName,
