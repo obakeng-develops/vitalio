@@ -153,6 +153,12 @@ def register_provider(request):
             user = Account.objects.create_user(email=email, password=password1, user_type='3')
             user.save()
 
+            # Add to company
+            account_company = AccountCompany()
+            account_company.company = Company.objects.get(pk=1)
+            account_company.user = user
+            account_company.save()
+
             assign_role(user, 'provider')
 
             return redirect(reverse("thank_you"))
