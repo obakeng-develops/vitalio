@@ -27,3 +27,13 @@ footer {
 .nav-link:hover {
     border-bottom: 2px solid #005C69;
 }
+
+/* About Page styling */
+.person {
+    width:400px;
+    height: 400px;
+}
+.image {
+    width: 150px;
+    height: 150px;
+}
