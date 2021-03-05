@@ -9,3 +9,6 @@ def about(request):
 
 def pricing(request):
     return render(request, "pages/pricing.html")
+
+def demo(request):
+    return render(request, "pages/demo.html")
