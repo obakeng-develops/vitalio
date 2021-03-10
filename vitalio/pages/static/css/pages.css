@@ -1,9 +1,9 @@
 body {
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 .lead, .navbar {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 .team {
     width: 150px;
@@ -19,8 +19,9 @@ footer {
 }
 
 /* Font styles */
-.font-montserrat {
-    font-family: 'Montserrat', sans-serif;
+.font-manrope {
+    font-family: 'Manrope Bold', sans-serif;
+    font-weight: 700;
 }
 
 /* Hover styles */
@@ -30,7 +31,7 @@ footer {
 
 /* About Page styling */
 .person {
-    width:400px;
+    width:500px;
     height: 400px;
 }
 .image {
