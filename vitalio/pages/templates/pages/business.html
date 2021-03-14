@@ -1,0 +1,52 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block title %} For Your Business | vitalio. {% endblock %}
+
+{% block content %}
+
+<section class="container-fluid business mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <h1 class="font-manrope-bold text-center mt-5">Make the workplace psychologically safe.</h1>
+            <h3 class="lead mt-2 text-center">As a business, stand out as an employer that cares.</h3>
+            <h3 class="lead mt-2 text-center">Get to level up your benefits.</h3>
+            <div class="card-deck my-5 py-5">
+                <div class="card border-0">
+                  <div class="card-body">
+                    <h5 class="card-title font-manrope-bold">Increase productivity and reduce absenteeism</h5>
+                    <p class="card-text my-5">A psychologist in your 
+                        employees' pockets will keep 
+                        them productive and ready to 
+                        tackle their tasks.</p>
+                  </div>
+                </div>
+                <div class="card border-0">
+                  <div class="card-body">
+                    <h5 class="card-title font-manrope-bold">Stand out as the right employer</h5>
+                    <p class="card-text my-5">Stand out in a crowded talent market by offering a perk that your employees truly want and need: unlimited virtual access to doctors, nurses, and other healthcare professionals.</p>
+                  </div>
+                </div>
+                <div class="card border-0">
+                  <div class="card-body">
+                    <h5 class="card-title font-manrope-bold">Promote mental health and wellness for all</h5>
+                    <p class="card-text my-5">Your employees will be thankful and proactive about their health, and your bottom line will be positively impacted.</p>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container-fluid talk bg-caribbean-green mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8 mt-5 pt-5">
+            <h2 class="display-4">Still unsure about Vitalio for your business?</h2>
+            <a class="btn btn-primary shadow bg-midnight-green-white btn-lg" href="{% url 'demo' %}">Request Demo</a>
+        </div>
+    </div>
+</section>
+
+{% include 'pages/footer.html' %}
+
+{% endblock %}

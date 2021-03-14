@@ -12,3 +12,9 @@ def pricing(request):
 
 def demo(request):
     return render(request, "pages/demo.html")
+
+def business(request):
+    return render(request, "pages/business.html")
+
+def patients(request):
+    return render(request, "pages/patients.html")
