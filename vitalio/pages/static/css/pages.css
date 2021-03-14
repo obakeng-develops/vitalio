@@ -1,5 +1,12 @@
 body {
     font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+}
+
+/* Logo */
+.logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
 }
 
 .lead, .navbar {
@@ -10,23 +17,66 @@ body {
     height: 150px;
 }
 
-footer {
-    background-color: #005C69;
-    color: white;
+/* Sections */
+.splash {
+    height: 80vh;
 }
+.facts {
+    height: 100vh;
+}
+.benefits {
+    height: 100vh;
+}
+.footer {
+    color: white;
+    height: 40vh;
+}
+
+/* Footer */
 .footer-link {
     color: white;
 }
 
+/* Background Styles */
+.bg-midnight-green {
+    background-color: #073B4C;
+}
+.bg-caribbean-green {
+    background-color: #06D7A0;
+}
+.bg-maximum-red {
+    background-color: #D62828;
+}
+.bg-midnight-green-white {
+    background-color: #073B4C;
+    border: 2px solid #073B4C;
+}
+.bg-caribbean-green-white {
+    background-color: #06D7A0;
+    border: 2px solid #06D7A0;
+}
+.bg-maximum-red-white {
+    background-color: #D62828;
+    border: 2px solid #D62828;
+}
+
 /* Font styles */
-.font-manrope {
+.font-manrope-bold {
     font-family: 'Manrope Bold', sans-serif;
     font-weight: 700;
+}
+.font-poppins-light {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+}
+.font-grotesk {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2em;
 }
 
 /* Hover styles */
 .nav-link:hover {
-    border-bottom: 2px solid #005C69;
+    border-bottom: 2px solid #D62828;
 }
 
 /* About Page styling */

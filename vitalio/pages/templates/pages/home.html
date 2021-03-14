@@ -4,78 +4,75 @@
 {% block title %} Vitalio {% endblock %}
 
 {% block content %}
-<section class="container-fluid">
-    <div class="row justify-content-center my-5 py-5">
-        <div class="col-md-10">
+<section class="container-fluid splash d-flex align-items-center">
+    <div class="row justify-content-center py-5">
+        <div class="col-sm-5">
             <div class="my-5">
-                <h1 class="display-2 font-manrope">Bring balance into your team.</h1>
+                <h1 class="display-1 font-manrope-bold">Bring Balance To Your Team.</h1>
                 <p class="lead">Vitalio is an ongoing, proactive telehealth platform that allows employees access to healthcare
                     services on the web.
                 </p>
-                <a class="btn btn-primary" href="{% url 'demo' %}">Request Demo</a>
+                <a class="btn btn-primary shadow bg-maximum-red-white btn-lg" href="{% url 'demo' %}">Request Demo</a>
+            </div>
+        </div>
+        <div class="col-sm-5 d-none d-md-block d-sm-none">
+            <div class="my-4 align-items-center d-flex justify-content-center">
+                <img src="{% static 'images/madison.jpg' %}" class="shadow" width="500" height="500">
             </div>
         </div>
     </div>
 </section>
 
-<section class="container-fluid">
-    <div class="row justify-content-center my-5 py-5">
-        <div class="col-md-10">
-            <h2 class="text-center font-manrope">Big Business Benefits</h2>
-            <div class="row my-5 justify-content-center">
-                <div class="col-md-6 d-flex justify-content-center align-items-center">
-                    <div>
-                        <h3 class="font-manrope">Happy employees, happy business.</h3>
-                        <p class="lead">Reduce absenteeism, manage workplace stress and improve productivity.</p>
-                    </div>
-                </div>
-                <div class="col-md-6 d-flex justify-content-center align-items-center">
-                    <img src="{% static 'images/Croods - Party Time.png' %}" width='550' height='390'>
-                </div>
-            </div>
-            <div class="row my-5 justify-content-center">
-                <div class="col-md-6 d-flex justify-content-center align-items-center">
-                    <img src="{% static 'images/Hands-Give.png' %}" width='480' height='320'>
-                </div>
-                <div class="col-md-6 d-flex justify-content-center align-items-center">
-                    <div>
-                        <h3 class="font-manrope">Save medical costs.</h3>
-                        <p class="lead">Reduce medical aid spend on medication and other drug-related costs.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row my-5 justify-content-center">
-                <div class="col-md-6 d-flex justify-content-center align-items-center">
-                    <div>
-                        <h3 class="font-manrope">Convenient access to healthcare.</h3>
-                        <p class="lead">Allow employees to conveniently access our virtual clinic on the web.</p>
-                    </div>
-                </div>
-                <div class="col-md-6 d-flex justify-content-center align-items-center">
-                    <img src="{% static 'images/Humaaans - 3 Characters.png' %}" width='550' height='390'>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="container-fluid">
+<section class="container-fluid benefits d-flex align-items-center">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card shadow my-5">
-                <div class="row px-5 py-5">
-                    <div class="col-md-6">
-                        <h2 class="font-manrope">A virtual clinic, close to you.</h2>
-                        <p class="lead">Get access to a psychologist or counsellor on the web.</p>
-                    </div>
-                    <div class="col-md-6">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Access to a psychologist/counsellor.</li>
-                            <li class="list-group-item">Book a convenient timeslot.</li>
-                            <li class="list-group-item">12/20 sessions a month.</li>
-                        </ul>
-                    </div>
+        <div class="col-md-10">
+            <h1 class="text-center font-manrope-bold">Big Business Benefits</h1>
+            <div class="card-deck my-5 py-5">
+                <div class="card border-0">
+                  <img class="card-img-top" src="{% static 'images/Croods - Party Time.png' %}" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title text-center font-manrope-bold">ATTRACT TALENT</h5>
+                    <p class="card-text my-5">Businesses that take care of employees stand out in the job market.</p>
+                  </div>
                 </div>
+                <div class="card border-0">
+                  <img class="card-img-top" src="{% static 'images/Hands-Give.png' %}" alt="Card image cap" height="370">
+                  <div class="card-body">
+                    <h5 class="card-title text-center font-manrope-bold">REDUCE HEALTHCARE COSTS</h5>
+                    <p class="card-text my-5">Reduce the total amount spent on medication as part of your group benefits plan.</p>
+                  </div>
+                </div>
+                <div class="card border-0"">
+                  <img class="card-img-top" src="{% static 'images/Humaaans - 3 Characters.png' %}" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title text-center font-manrope-bold">IMPROVED PRODUCTIVITY</h5>
+                    <p class="card-text my-5">Reduce absenteeism, manage workplace stress and improve productivity.</p>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container-fluid facts bg-caribbean-green d-flex align-items-center">
+    <div class="row justify-content-center">
+        <div class="col-md-4 mx-4">
+            <h1 class="display-1 text-white font-manrope-bold">
+                You Want To Take Care Of Your Team. We Get It.
+            </h1>
+        </div>
+        <div class="col-md-4 mx-4 text-white">
+            <h3 class="font-manrope-bold">Here are the facts.</h3>
+            <div class="my-3">
+                <p class="lead">Work-related stress and major depression, 
+                    burnout and anxiety disorders are costing
+                    SA’s economy an estimated R40.6 billion
+                    a year - equivalent to 2.2 percent of 
+                    gross domestic product.</p>
+                <p class="lead">15% of South African employees miss work every day.</p>
+                <p class="lead">The South African Depression and Anxiety Group (SADAG)
+                    found that one in four workers in South Africa has been diagnosed 
+                    with depression and, as a result, take an average of 18 days a year off work.</p>
             </div>
         </div>
     </div>
