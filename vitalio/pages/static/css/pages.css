@@ -18,35 +18,8 @@ body {
 }
 
 /* Sections */
-.splash {
-    height: 80vh;
-}
-.facts {
-    height: 100vh;
-}
-.benefits {
-    height: 100vh;
-}
-.footer {
+.footer, .talk {
     color: white;
-    height: 40vh;
-}
-.about {
-    height: 100vh;
-}
-.business {
-    height: 80vh;
-}
-.talk {
-    height: 40vh;
-    color: #fff;
-}
-.patients {
-    height: 100vh;
-    color: #fff;
-}
-.pricing {
-    height: 80vh;
 }
 
 /* Footer */
