@@ -56,7 +56,7 @@ class Profile(m.Model):
     profile_image = m.ImageField(default='default.jpg', upload_to='profile_images')
 
     def __str__(self):
-        return self.first_name + " " + self.last_name
+        return str(self.first_name) + " " + str(self.last_name)
 
 class Address(m.Model):
     profile = m.ForeignKey(Profile, on_delete=m.CASCADE, related_name="user_address")
@@ -68,4 +68,4 @@ class Address(m.Model):
     zip_code = m.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
-        return self.line_one + ", " + self.surburb + ", " + self.city + ", " + self.province + ", " + self.country + ", " + self.zip_code
+        return str(self.line_one) + ", " + str(self.surburb) + ", " + str(self.city) + ", " + str(self.province) + ", " + str(self.country) + ", " + str(self.zip_code)

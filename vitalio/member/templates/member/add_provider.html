@@ -1,7 +1,30 @@
 {% extends 'member/base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %} Add Provider {% endblock %}
 
 {% block content %}
-
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-md-5 my-5">
+            {% if messages %}
+                {% for message in messages %}
+                    <div{% if message.tags %} class="{{ message.tags }} alert alert-success"{% endif %}>{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+            <h1>Add a new provider</h1>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        {{ account_form|crispy }}
+                        <hr>
+                        {{ profile_form|crispy }}
+                    </div>
+                </div>
+                <button type="submit" class="btn bg-maximum-red-white text-white my-3 shadow">Add provider</button>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}
