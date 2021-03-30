@@ -6,11 +6,13 @@ from django.db import transaction
 # Forms
 from account.forms import ProfileForm
 from company.forms import CompanyForm
+from provider.forms import ProviderForm
 
 # Models 
 from .models import Onboard
 from account.models import Profile
 from company.models import Company, AccountCompany
+from provider.models import Provider
 
 def onboard_member(request):
     return render(request, "onboard/member/hello.html")
@@ -122,11 +124,6 @@ def onboard_provider_profile(request):
         form = ProfileForm(request.POST)
 
         if form.is_valid():
-            # Change their isOnboarded value to true
-            onboard = Onboard.objects.get(account=request.user)
-            onboard.isOnboarded = True
-            onboard.save()
-
             # Update their profile
             user = Profile.objects.get(account=request.user)
             user.first_name = form.cleaned_data["first_name"]
@@ -134,7 +131,7 @@ def onboard_provider_profile(request):
             user.save()
 
             # Say thank you
-            return redirect(reverse("provider_dashboard"))
+            return redirect(reverse("onboard_provider_details"))
     else:
 
         form = ProfileForm()
@@ -143,3 +140,35 @@ def onboard_provider_profile(request):
         }
 
     return render(request, "onboard/provider/profile.html", context)
+
+@transaction.atomic
+def onboard_provider_details(request):
+
+    form = ProviderForm()
+    context = {
+        "form": form
+    }
+
+    if request.method == 'POST':
+
+        form = ProviderForm(request.POST)
+
+        if form.is_valid():
+            # Change their isOnboarded value to true
+            onboard = Onboard.objects.get(account=request.user)
+            onboard.isOnboarded = True
+            onboard.save()
+
+            # Update their provider details
+            profile = Profile.objects.get(account=request.user)
+            provider = Provider.objects.get(profile=profile)
+            profile.phone = form.cleaned_data["phone"]
+            profile.years_of_experience = form.cleaned_data["years_of_experience"]
+            profile.registered_council = form.cleaned_data["registered_council"]
+            profile.electronic_card = form.cleaned_data["electronic_card"]
+            profile.save()
+
+            # Say thank you
+            return redirect(reverse("provider_dashboard"))
+
+    return render(request, "onboard/provider/details.html", context)
