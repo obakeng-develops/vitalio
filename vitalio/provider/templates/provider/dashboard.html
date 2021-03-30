@@ -1,4 +1,5 @@
 {% extends 'provider/base.html' %}
+{% load humanize %}
 
 {% block title %} Dashboard {% endblock %}
 
@@ -16,7 +17,7 @@
                     {% for booking in bookings %}
                     <div class="media">
                         <div class="media-body">
-                          <h6 class="mt-0">You have a booking with {{ booking.patient }} on {{ booking.timeslot.day }} at {{ booking.timeslot.start_time }}</h6>
+                          <h6 class="mt-0">You have a booking with {{ booking.patient }} {{ booking.timeslot.day|naturalday }} at {{ booking.timeslot.start_time }}</h6>
                           {% if booking.isAccepted == False %}
                             <form method="POST" action="{% url 'accept_booking' %}">
                                 {% csrf_token %}
