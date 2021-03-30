@@ -6,11 +6,13 @@
 {% block content %}
 <div class="container-fluid">
     <div class="row justify-content-center my-5">
-        <div class="col-md-5 my-5 py-5">
+        <div class="col-md-5 my-5 py-2">
             <form method="POST">
                 {% csrf_token %}
+                <h1 class="display-3 text-white">One last thing.</h1>
+                <p class="lead text-white">Please enter crucial details that helps us identify you.</p>
                 <div class="card shadow">
-                    <div class="card-header bg-white text-center p-4">Enter your details | Step 3 of 3</div>
+                    <div class="card-header bg-white text-center p-4">Step 3 of 3</div>
                     <div class="card-body py-4">
                         
                         {{ form|crispy }}

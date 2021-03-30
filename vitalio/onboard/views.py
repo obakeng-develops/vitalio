@@ -15,7 +15,8 @@ from company.models import Company, AccountCompany
 from provider.models import Provider
 
 def onboard_member(request):
-    return render(request, "onboard/member/hello.html")
+
+    return render(request, "onboard/member/hello.html", context)
 
 @transaction.atomic
 def onboard_member_profile(request):
@@ -114,32 +115,40 @@ def onboard_admin_company(request):
     return render(request, "onboard/admin/company.html", context)
 
 def onboard_provider(request):
-    return render(request, "onboard/provider/hello.html")
 
-@transaction.atomic
-def onboard_provider_profile(request):
+    profile = Profile.objects.get(account=request.user)
 
-    if request.method == 'POST':
+    context = {
+        "profile": profile
+    }
 
-        form = ProfileForm(request.POST)
+    return render(request, "onboard/provider/hello.html", context)
 
-        if form.is_valid():
-            # Update their profile
-            user = Profile.objects.get(account=request.user)
-            user.first_name = form.cleaned_data["first_name"]
-            user.last_name = form.cleaned_data["last_name"]
-            user.save()
+# Removed this because this is done through admin interface
+# @transaction.atomic
+# def onboard_provider_profile(request):
 
-            # Say thank you
-            return redirect(reverse("onboard_provider_details"))
-    else:
+#     if request.method == 'POST':
 
-        form = ProfileForm()
-        context = {
-            "form": form
-        }
+#         form = ProfileForm(request.POST)
 
-    return render(request, "onboard/provider/profile.html", context)
+#         if form.is_valid():
+#             # Update their profile
+#             user = Profile.objects.get(account=request.user)
+#             user.first_name = form.cleaned_data["first_name"]
+#             user.last_name = form.cleaned_data["last_name"]
+#             user.save()
+
+#             # Say thank you
+#             return redirect(reverse("onboard_provider_details"))
+#     else:
+
+#         form = ProfileForm()
+#         context = {
+#             "form": form
+#         }
+
+#     return render(request, "onboard/provider/profile.html", context)
 
 @transaction.atomic
 def onboard_provider_details(request):
@@ -159,14 +168,19 @@ def onboard_provider_details(request):
             onboard.isOnboarded = True
             onboard.save()
 
-            # Update their provider details
+            # Retrieve profile
             profile = Profile.objects.get(account=request.user)
+
+            # Add the provider details
+            create_provider = Provider.objects.create(profile=profile)
+
+            # Update their provider details
             provider = Provider.objects.get(profile=profile)
-            profile.phone = form.cleaned_data["phone"]
-            profile.years_of_experience = form.cleaned_data["years_of_experience"]
-            profile.registered_council = form.cleaned_data["registered_council"]
-            profile.electronic_card = form.cleaned_data["electronic_card"]
-            profile.save()
+            provider.phone = form.cleaned_data["phone"]
+            provider.years_of_experience = form.cleaned_data["years_of_experience"]
+            provider.registered_council = form.cleaned_data["registered_council"]
+            provider.electronic_card = form.cleaned_data["electronic_card"]
+            provider.save()
 
             # Say thank you
             return redirect(reverse("provider_dashboard"))
