@@ -1,0 +1,16 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    background-color: #073B4C;
+}
+
+/* Background Styles */
+.bg-midnight-green {
+    background-color: #073B4C;
+}
+.bg-caribbean-green {
+    background-color: #06D7A0;
+}
+.bg-maximum-red {
+    background-color: #D62828;
+}
