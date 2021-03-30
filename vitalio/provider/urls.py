@@ -2,7 +2,7 @@
 from django.urls import path, re_path
 
 # Views
-from .views import provider_dashboard, provider_profile, provider_schedule, set_schedule, accept_booking, leave_call, provider_patients
+from .views import provider_dashboard, provider_profile, provider_schedule, set_schedule, accept_booking, leave_call, provider_patients, provider_account
 
 urlpatterns = [
     path("", provider_dashboard, name="provider_dashboard"),
@@ -13,4 +13,5 @@ urlpatterns = [
     re_path("accept-booking", accept_booking, name="accept_booking"),
     path("leave-call/", leave_call, name="leave_call_provider"),
     path("patients", provider_patients, name="provider_patients"),
+    path("account", provider_account, name="provider_account")
 ]

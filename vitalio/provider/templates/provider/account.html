@@ -1,0 +1,43 @@
+{% extends 'provider/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Your account {% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center my-5">
+
+        <div class="col-md-3">
+            <div class="nav card shadow-sm px-2 py-2 flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Your Account</a>
+            </div>
+        </div>
+
+        <div class="col-md-7">
+            <div class="tab-content" id="v-pills-tabContent">
+                <!-- start of account tab -->
+                <div class="tab-pane fade show active" id="v-pills-account" role="tabpanel" aria-labelledby="v-pills-account-tab">
+                    {% if messages %}
+                            {% for message in messages %}
+                            <div{% if message.tags %} class="alert alert-success"{% endif %}>{{ message }}</div>
+                            {% endfor %}
+                    {% endif %}
+                    <div class="card shadow px-4 py-4">
+                        <form method="POST">
+                            {% csrf_token %}
+                        <div class="media">
+                            <div class="media-body">
+                                {{ form|crispy }}
+                                <button class="btn btn-primary" type="submit">Update</button>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- end of account tab -->
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

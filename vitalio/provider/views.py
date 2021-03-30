@@ -12,10 +12,10 @@ import os
 
 # Models 
 from account.models import Profile
-from .models import Schedule, Booking
+from .models import Schedule, Booking, Provider
 
 # Forms
-from .forms import ScheduleForm
+from .forms import ScheduleForm, ProviderForm
 from account.forms import ProfileForm
 
 # Utils
@@ -181,3 +181,30 @@ def provider_patients(request):
     }
 
     return render(request, "provider/patients.html", context)
+
+@has_role_decorator('provider')
+def provider_account(request):
+
+    profile = Profile.objects.get(account=request.user)
+    provider = Provider.objects.get(profile=profile)
+
+    form = ProviderForm(instance=provider)
+
+    context = {
+        "form": form
+    }
+
+    if request.method == 'POST':
+
+        form = ProviderForm(request.POST, instance=provider)
+
+        if form.is_valid():
+            provider = Provider.objects.get(profile=profile)
+            provider.phone = form.cleaned_data["phone"]
+            provider.years_of_experience = form.cleaned_data["years_of_experience"]
+            provider.registered_council = form.cleaned_data["registered_council"]
+            provider.electronic_card = form.cleaned_data["electronic_card"]
+            provider.save()
+            messages.info(request, "Your profile has been updated!")
+
+    return render(request, "provider/account.html", context)

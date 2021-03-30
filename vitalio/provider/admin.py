@@ -2,7 +2,7 @@
 from django.contrib import admin
 
 # Models
-from .models import Booking, Schedule
+from .models import Booking, Schedule, Provider
 
 class BookingAdmin(admin.ModelAdmin):
 
@@ -24,5 +24,16 @@ class ScheduleAdmin(admin.ModelAdmin):
     search_fields = ('account',)
     ordering = ('account',)
 
+class ProviderAdmin(admin.ModelAdmin):
+
+    model = Provider
+
+    list_display = ('profile', 'phone', 'years_of_experience', 'registered_council', 'electronic_card')
+    list_filter = ('profile', 'years_of_experience', 'registered_council')
+    
+    search_fields = ('profile',)
+    ordering = ('profile',)
+
 admin.site.register(Booking, BookingAdmin)
 admin.site.register(Schedule, ScheduleAdmin)
+admin.site.register(Provider, ProviderAdmin)

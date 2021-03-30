@@ -4,7 +4,7 @@ from datetime import date, datetime
 from django.core.exceptions import ValidationError
 
 # Models
-from .models import Schedule, Booking
+from .models import Schedule, Booking, Provider
 
 class ScheduleForm(ModelForm):
   class Meta:
@@ -42,6 +42,12 @@ class ScheduleForm(ModelForm):
       raise ValidationError("Your end time cannot be before your start time.")
 
     return end_time
+
+class ProviderForm(ModelForm):
+  class Meta:
+    model = Provider
+    fields = '__all__'
+    exclude = ['profile']
 
 class BookingForm(ModelForm):
   class Meta:

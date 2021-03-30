@@ -47,3 +47,32 @@ class Booking(m.Model):
 
     def __str__(self):
         return self.room_code
+
+class Provider(m.Model):
+
+    ENTRY = '0-2'
+    MID = '3-5'
+    SENIOR = '5+'
+
+    YEARS_OF_EXPERIENCE = [
+        (ENTRY, 'Entry (0-2yrs)'),
+        (MID, 'Mid (3-5yrs)'),
+        (SENIOR, 'Senior (5+ yrs)')
+    ]
+
+    HPCSA = 'HPCSA'
+    CCSA = 'CCSA'
+
+    REGISTERED_COUNCIL = [
+        (HPCSA, 'Health Professions Council of South Africa'),
+        (CCSA, 'Council for Counsellors in South Africa')
+    ]
+
+    profile = m.OneToOneField(Profile, on_delete=m.CASCADE, related_name="provider_profile")
+    phone = m.CharField(max_length=10, blank=True, help_text='Contact phone number')
+    years_of_experience = m.CharField(max_length=4, choices=YEARS_OF_EXPERIENCE, default=ENTRY)
+    registered_council = m.CharField(max_length=5, choices=REGISTERED_COUNCIL, default=HPCSA)
+    electronic_card = m.FileField(upload_to='provider_files', null=True, blank=True)
+
+    def __str__(self):
+        return self.registered_council + " (" + self.years_of_experience + ")"
