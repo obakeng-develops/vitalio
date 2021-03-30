@@ -32,10 +32,10 @@
                 <li class="nav-item">
                   <a class="nav-link text-white" href="{% url 'member_dashboard' %}">Dashboard</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link text-white" href="#">Usage</a>
-                </li>
                 {% if user|has_role:'admin' %}
+                  <li class="nav-item">
+                    <a class="nav-link text-white" href="#">Usage</a>
+                  </li>
                   {% if company.company.company_name == 'Vitalio' %}
                   <li class="nav-item">
                     <a class="nav-link text-white" href="{% url 'admin_add_provider' %}">Add Provider</a>

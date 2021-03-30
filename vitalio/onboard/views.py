@@ -16,7 +16,7 @@ from provider.models import Provider
 
 def onboard_member(request):
 
-    return render(request, "onboard/member/hello.html", context)
+    return render(request, "onboard/member/hello.html")
 
 @transaction.atomic
 def onboard_member_profile(request):
