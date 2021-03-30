@@ -6,6 +6,7 @@ from django.utils.safestring import mark_safe
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.forms import PasswordChangeForm
 from django.db import transaction
+from django.contrib import messages
 import calendar
 import os
 
@@ -48,6 +49,18 @@ def provider_dashboard(request):
 
 @has_role_decorator('provider')
 def provider_profile(request):
+
+    profile = Profile.objects.get(account=request.user)
+    form = ProfileForm(instance=profile)
+
+    password = PasswordChangeForm(request.user)
+
+    context = {
+        "form": form,
+        "profile": profile,
+        "password": password
+    }   
+
     if request.method == 'POST':
 
         form = ProfileForm(request.POST, instance=request.user)
@@ -57,21 +70,8 @@ def provider_profile(request):
             profile = Profile.objects.get(account=request.user)
             profile.first_name = form.cleaned_data["first_name"]
             profile.last_name = form.cleaned_data["last_name"]
-            profile.save()
-    
-    else:
-
-        form = ProfileForm(instance=request.user)
-
-        profile = Profile.objects.get(account=request.user)
-
-        password = PasswordChangeForm(request.user)
-
-        context = {
-            "form": form,
-            "profile": profile,
-            "password": password
-        }    
+            profile.save() 
+            messages.info(request, "Your profile has been updated!")
 
     return render(request, "provider/profile.html", context)
 
@@ -170,3 +170,14 @@ def leave_call(request):
         booking.save()
 
     return redirect(reverse("provider_dashboard"))
+
+@has_role_decorator('provider')
+def provider_patients(request):
+
+    bookings = Booking.objects.filter(provider=request.user, isEnded=True)
+
+    context = {
+        "bookings": bookings
+    }
+
+    return render(request, "provider/patients.html", context)

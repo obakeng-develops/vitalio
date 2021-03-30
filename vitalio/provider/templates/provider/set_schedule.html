@@ -9,14 +9,14 @@
         <div class="col-md-5">
             <div class="card px-4 py-4 shadow">
                 <div class="clearfix">
-                    <a class="btn btn-info left" href="{% url 'provider_schedule' %}"> Calendar </a>
+                    <a class="btn btn-info left bg-midnight-green" href="{% url 'provider_schedule' %}"> Calendar </a>
                 </div>
                   
                 <form method="post">
                     {% csrf_token %}
                     <table class="form form-table">
                       {{ form|crispy }}
-                      <tr><td colspan="2"><button type="submit" class="btn btn-info right"> Submit </button></td></tr>
+                      <tr><td colspan="2"><button type="submit" class="btn btn-info right bg-maximum-red px-4"> Submit </button></td></tr>
                     </table>
                 </form>
             </div>

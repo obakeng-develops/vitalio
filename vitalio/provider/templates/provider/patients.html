@@ -1,0 +1,29 @@
+{% extends 'provider/base.html' %}
+
+{% block title %} Your patients {% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-md-6 my-5">
+            <div class="h1">Your patients</div>
+            <p class="lead">These are all the patients you've seen in the past.</p>
+            <div class="card my-4 shadow-sm">
+                <div class="card-body">
+                    {% for booking in bookings %}
+                        <div class="media">
+                            <div class="media-body">
+                                <h5 class="mt-0">{{ booking.patient }}</h5>
+                                {{ booking.timeslot }}
+                            </div>
+                        </div>
+                        <hr>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

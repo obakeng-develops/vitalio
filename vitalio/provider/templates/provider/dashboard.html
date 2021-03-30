@@ -12,7 +12,9 @@
             <a href="{% url 'provider_schedule' %}" class="btn btn-success shadow" id="step-1">Create Schedule</a>
 
             <div class="card shadow my-5" id="step-2">
-                <div class="card-header bg-white p-4">Bookings</div>
+                <div class="card-header bg-white p-3 h5">Bookings
+                    <p class="h6 text-muted">You will find your booked timeslots here.</p>
+                </div>
                 <div class="card-body">
                     {% for booking in bookings %}
                     <div class="media">

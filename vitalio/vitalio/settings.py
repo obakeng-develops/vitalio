@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 ALLOWED_HOSTS = ["*"]
@@ -142,7 +142,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 AUTH_USER_MODEL = 'account.Account'
 
 LOGIN_REDIRECT_URL = "entry_point"
-LOGOUT_REDIRECT_URL = "_/accounts/login"
+LOGOUT_REDIRECT_URL = "home"
 
 ROLEPERMISSIONS_MODULE = 'vitalio.roles'
 
