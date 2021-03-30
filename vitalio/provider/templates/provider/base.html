@@ -12,36 +12,40 @@
         <link rel="stylesheet" href="{% static 'css/provider.css' %}">
 
         <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     </head>
     <body>
 
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-            <a class="navbar-brand" href="{% url 'provider_dashboard' %}">Vitalio</a>
+        <nav class="navbar navbar-expand-lg navbar-light bg-nav-midnight-green shadow">
+            <a class="navbar-brand logo text-white" href="{% url 'provider_dashboard' %}">vitalio.</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'provider_dashboard' %}">Dashboard</a>
+                  <a class="nav-link text-white" href="{% url 'provider_dashboard' %}">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'provider_schedule' %}">Schedule</a>
+                  <a class="nav-link text-white" href="{% url 'provider_schedule' %}">Schedule</a>
                 </li>
               </ul>
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       {{ user.email }}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                      <a class="dropdown-item" href="{% url 'provider_profile' %}">Profile</a>
+                      <a class="dropdown-item " href="{% url 'provider_profile' %}">Profile</a>
                     </div>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                  <a class="nav-link text-white" href="{% url 'logout' %}">Logout</a>
                 </li>
               </ul>
             </div>
