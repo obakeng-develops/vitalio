@@ -175,3 +175,7 @@ def admin_add_provider(request):
 
 
     return render(request, "member/add_provider.html", context)
+
+@has_role_decorator('admin')
+def admin_usage_statistics(request):
+    return render(request, "member/usage_statistics.html")

@@ -34,7 +34,7 @@
                 </li>
                 {% if user|has_role:'admin' %}
                   <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Usage</a>
+                    <a class="nav-link text-white" href="{% url 'admin_usage_statistics' %}">Usage</a>
                   </li>
                   {% if company.company.company_name == 'Vitalio' %}
                   <li class="nav-item">
