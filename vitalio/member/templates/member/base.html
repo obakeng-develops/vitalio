@@ -1,4 +1,5 @@
 {% load static %}
+{% load permission_tags %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,25 +23,29 @@
 
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-midnight-green shadow-sm">
-            <a class="navbar-brand logo" href="{% url 'member_dashboard' %}">Vitalio</a>
+            <a class="navbar-brand logo text-white" href="{% url 'member_dashboard' %}">vitalio.</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                  <a class="nav-link text-white" href="{% url 'provider_dashboard' %}">Dashboard</a>
+                  <a class="nav-link text-white" href="{% url 'member_dashboard' %}">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link text-white" href="{% url 'provider_schedule' %}">Schedule</a>
+                  <a class="nav-link text-white" href="#">Usage</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link text-white" href="{% url 'provider_patients' %}">Patients</a>
-                </li>
+                {% if user|has_role:'admin' %}
+                  {% if company.company.company_name == 'Vitalio' %}
+                  <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'admin_add_provider' %}">Add Provider</a>
+                  </li>
+                  {% endif %}
+                {% endif %}
               </ul>
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       {{ user.email }}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">

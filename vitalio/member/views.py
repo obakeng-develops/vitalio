@@ -39,10 +39,13 @@ def member_dashboard(request):
 
     bookings = Booking.objects.filter(patient=request.user, isEnded=False)
 
+    account_company = AccountCompany.objects.get(user=request.user)
+
     context = {
         "profile": profile,
         "schedules": schedules,
         "bookings": bookings,
+        "company": account_company
     }
 
     return render(request, "member/dashboard.html", context)
@@ -120,3 +123,8 @@ def leave_call_member(request):
             return redirect('member_dashboard')
     
     return redirect(reverse("member_dashboard"))
+
+@login_required
+def admin_add_provider(request):
+
+    return redirect(request, "member/add_provider.html")
