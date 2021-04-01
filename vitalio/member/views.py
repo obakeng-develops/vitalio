@@ -57,6 +57,21 @@ def member_dashboard(request):
 @login_required
 def member_profile(request):
 
+    profile = Profile.objects.get(account=request.user)
+
+    form = ProfileForm(instance=profile)
+
+    password = PasswordChangeForm(request.user)
+
+    company_user = AccountCompany.objects.get(user=request.user)
+
+    context = {
+        "form": form,
+        "profile": profile,
+        "password": password,
+        "company_user": company_user
+    }  
+
     if request.method == 'POST':
 
         form = ProfileForm(request.POST, instance=request.user)
@@ -68,24 +83,7 @@ def member_profile(request):
             profile.last_name = form.cleaned_data["last_name"]
             profile.save()
 
-            return redirect(reverse('member_profile'))
-    
-    else:
-
-        form = ProfileForm(instance=request.user)
-
-        password = PasswordChangeForm(request.user)
-
-        profile = Profile.objects.get(account=request.user)
-
-        company_user = AccountCompany.objects.get(user=request.user)
-
-        context = {
-            "form": form,
-            "profile": profile,
-            "password": password,
-            "company_user": company_user
-        }    
+            return redirect(reverse('member_profile'))  
 
     return render(request, "member/profile.html", context)
 
