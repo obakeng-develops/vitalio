@@ -154,6 +154,7 @@ def accept_booking(request):
 
     return redirect(reverse("provider_dashboard"))
 
+@transaction.atomic
 def leave_call(request):
 
     if request.POST:

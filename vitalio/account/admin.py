@@ -12,7 +12,7 @@ class AccountAdmin(UserAdmin):
     add_form = AccountCreationForm
     form = AccountChangeForm
     model = Account
-    list_display = ('email', 'is_staff', 'is_active', 'user_type')
+    list_display = ('id','email', 'is_staff', 'is_active', 'user_type')
     list_filter = ('email', 'is_staff', 'is_active',)
     fieldsets = (
         (None, {'fields': ('email', 'password')}),

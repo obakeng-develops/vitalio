@@ -1,16 +1,17 @@
 # Django
 from django.shortcuts import render, redirect, reverse
 from django.db import transaction
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from datetime import datetime
 import os
 
 # Models
 from account.models import Account, Profile
 from provider.models import Schedule, Booking, Provider
-from company.models import Company, Location, AccountCompany
+from company.models import Company, Location, AccountCompany, CompanyBooking
 
 # Forms
 from account.forms import ProfileForm, AccountCreationForm
@@ -109,20 +110,34 @@ def create_booking(request):
     return redirect(reverse("member_dashboard"))
 
 @login_required
+@transaction.atomic
 def leave_call_member(request):
 
     if request.POST:
 
+        # Retrieve booking code
         roomcode = request.session.get('booking')
 
         client = Client(account_sid, auth_token)
 
+        # Retrieve company & booking
+        company = Company.objects.get(user=request.user)
+        booking = Booking.objects.get(room_code=roomcode)
+
+        # Add the booking to company stats
+        company_booking = CompanyBooking()
+        company_booking.company = company
+        company_booking.booking = booking
+        company_booking.save()
+
+        # Check if the room still exists, this is in case the provider left first
         exists = client.video.rooms.list(unique_name=roomcode)
 
         if exists is None:
             return redirect('member_dashboard')
         else:
             return redirect('member_dashboard')
+
     
     return redirect(reverse("member_dashboard"))
 
@@ -176,4 +191,16 @@ def admin_add_provider(request):
 
 @has_role_decorator('admin')
 def admin_usage_statistics(request):
-    return render(request, "member/usage_statistics.html")
+
+    currentMonth = datetime.now().month
+
+    company = AccountCompany.objects.get(user=request.user)
+
+    company_bookings = CompanyBooking.objects.filter(company=company.company, booking__timeslot__day__month=currentMonth).count()
+
+    context = {
+        "bookings": company_bookings,
+        "month": currentMonth
+    }
+
+    return render(request, "member/usage_statistics.html", context)

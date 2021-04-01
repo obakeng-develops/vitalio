@@ -3,6 +3,7 @@ from django.db import models as m
 
 # Models
 from account.models import Account
+from provider.models import Booking
 
 class Company(m.Model):
     company_name = m.CharField(max_length=50, blank=False)
@@ -29,3 +30,10 @@ class AccountCompany(m.Model):
 
     def __str__(self):
         return self.user.email + " from " + self.company.company_name
+
+class CompanyBooking(m.Model):
+    company = m.ForeignKey(Company, on_delete=m.CASCADE, related_name="company_bookings")
+    booking = m.ForeignKey(Booking, on_delete=m.CASCADE, related_name="bookings_made_by_company")
+
+    def __str__(self):
+        return str(self.company) + " (" + str(self.booking) + ")"
