@@ -1,8 +1,14 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load crispy_forms_tags %}
+
+{% block title %} Member Login {% endblock %}
 
 {% block content %}
 <div class="container">
+    <div class="row justify-content-center">
+        <img src="{% static 'images/logo-vitalio-midnight-green.png' %}" class="my-5">
+    </div>
     <div class="row justify-content-center my-5">
         <div class="col-md-5 my-5">
             <div class="card shadow px-4 py-4">
