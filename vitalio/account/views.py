@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
 from django.db.models.query_utils import Q
 from django.contrib.auth.forms import PasswordResetForm
+from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.db.models.query_utils import Q
 from django.utils.http import urlsafe_base64_encode
@@ -17,12 +18,13 @@ from django.utils.encoding import force_bytes
 from django.core.mail import send_mail, BadHeaderError
 from django.contrib import messages
 from django.http import HttpResponse
+from django.conf import settings
 
 # Forms
 from .forms import AccountCreationForm
 
 # Models
-from .models import Account
+from .models import Account, Profile
 from onboard.models import Onboard
 from company.models import Company, AccountCompany
 
@@ -206,16 +208,16 @@ def password_reset_request(request):
 					c = {
 					"email":user.email,
 					'domain':'127.0.0.1:8000',
-					'site_name': 'Website',
+					'site_name': 'Vitalio',
 					"uid": urlsafe_base64_encode(force_bytes(user.pk)),
 					"user": user,
 					'token': default_token_generator.make_token(user),
 					'protocol': 'http',
 					}
 					email = render_to_string(email_template_name, c)
-
+                    
 					try:
-						send_mail(subject, email, 'admin@example.com' , [user.email], fail_silently=False)
+						send_mail(subject, email, settings.DEFAULT_FROM_EMAIL , [user.email], fail_silently=False)
 					except BadHeaderError:
 						return HttpResponse('Invalid header found.')
 					return redirect ("password_reset_done")
