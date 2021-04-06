@@ -6,26 +6,7 @@
 
 <div class="container-fluid">
     <div class="row justify-content-center my-5">
-        <!-- <div class="col-md-3">
-            <div class="card shadow-sm">
-                <div class="card-header bg-white">Your appointments</div>
-                <div class="card-body">
-                    {% for booking in bookings %}
-                    <div class="media">
-                        <div class="media-body">
-                          <h6 class="mt-0">You have made a booking with {{ booking.timeslot.account.email }} on {{ booking.timeslot.day }} at {{ booking.timeslot.start_time }}</h6>
-                            <form method="POST" action="{% url 'test_audio' %}">
-                                {% csrf_token %}
-                                <input type="hidden" name="booking_code" value="{{ booking.room_code }}">
-                                <button class="btn btn-danger" type="submit">Join Room</button>
-                            </form>
-                          <hr>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div> -->
+        
         <div class="col-md-5">
             {% if messages %}
                             {% for message in messages %}
@@ -35,44 +16,8 @@
 
             <h1 class="display-4">Welcome {{ profile.first_name }}</h1>
             <p class="lead">What can we help you with today?</p>
-            <a class="btn btn-primary btn-lg" href="{% url 'start_assessment' %}">Book session</a>
+            <a class="btn btn-primary btn-lg shadow" href="{% url 'start_assessment' %}">Book session</a>
 
-            <!-- <div class="card shadow-sm px-4 py-4" style="width: 18rem;"> -->
-                <!-- <h1 class="text-center"><i class="fas fa-brain fa-2x my-2"></i></h1> -->
-                <!-- Modal Trigger button -->
-                <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#bookingModal">Book a session</button> -->
-
-                <!-- Modal -->
-                <!-- <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="bookingModalLabel">Book A Session</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form method="POST" action="{% url 'create_booking' %}">
-                            {% csrf_token %}
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label for="timeslotsSelect">Available timeslots</label>
-                                    <select class="form-control" id="timeslotsSelect" name="schedule">
-                                        {% for schedule in schedules %}
-                                        <option value="{{ schedule.pk }}">{{ schedule.day }}, {{ schedule.start_time }} - {{ schedule.end_time }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Book</button>
-                            </div>
-                        </form>
-                    </div>
-                    </div>
-                </div> -->
-            <!-- </div> -->
         </div>
     </div>
 </div>

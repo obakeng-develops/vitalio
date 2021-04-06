@@ -1,0 +1,12 @@
+{% autoescape off %}
+
+Hello {{user.first_name}},
+
+Your booking has been reserved for {{ booking.timeslot.day }} at {{ booking.timeslot.start_time  }}
+
+Keep this in your calendar. The link to your room will be in your account.
+
+Sincerely,
+The {{site_name}} Team
+
+{% endautoescape %}

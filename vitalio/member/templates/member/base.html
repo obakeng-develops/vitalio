@@ -32,6 +32,15 @@
                 <li class="nav-item">
                   <a class="nav-link text-white" href="{% url 'member_dashboard' %}">Dashboard</a>
                 </li>
+                {% if booking > 0 %}
+                  <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'member_bookings' %}">Bookings ({{ booking }})</a>
+                  </li>
+                {% else %}
+                  <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'member_bookings' %}">Bookings</a>
+                  </li>
+                {% endif %}
                 {% if user|has_role:'admin' %}
                   <li class="nav-item">
                     <a class="nav-link text-white" href="{% url 'admin_usage_statistics' %}">Usage</a>

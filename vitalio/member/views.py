@@ -5,6 +5,9 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.template.loader import render_to_string
+from django.core.mail import send_mail, BadHeaderError
+from django.conf import settings
 from datetime import datetime
 import os
 
@@ -37,30 +40,46 @@ auth_token = os.environ.get('TWILIO_AUTH_TOKEN')
 api_key_sid = os.environ.get('TWILIO_API_KEY_SID')
 api_key_secret = os.environ.get('TWILIO_API_KEY_SECRET')
 
-@transaction.atomic
+@login_required
 def member_dashboard(request):
 
     profile = Profile.objects.get(account=request.user)
 
-    schedules = Schedule.objects.filter(isBooked=False)
-
-    bookings = Booking.objects.filter(patient=request.user, isEnded=False)
+    bookings = Booking.objects.filter(patient=request.user, isEnded=False).count()
 
     account_company = AccountCompany.objects.get(user=request.user)
 
     context = {
         "profile": profile,
-        "schedules": schedules,
-        "bookings": bookings,
-        "company": account_company
+        "company": account_company,
+        "booking": bookings
     }
 
     return render(request, "member/dashboard.html", context)
 
 @login_required
+def member_bookings(request):
+
+    bookings = Booking.objects.filter(patient=request.user, isEnded=False)
+
+    booking_count = Booking.objects.filter(patient=request.user, isEnded=False).count()
+
+    date_today = datetime.today().date()
+
+    context = {
+        "bookings": bookings,
+        "date": date_today,
+        "booking": booking_count
+    }
+
+    return render(request, "member/bookings.html", context)
+
+@login_required
 def member_profile(request):
 
     profile = Profile.objects.get(account=request.user)
+
+    booking_count = Booking.objects.filter(patient=request.user, isEnded=False).count()
 
     form = ProfileForm(instance=profile)
 
@@ -72,7 +91,8 @@ def member_profile(request):
         "form": form,
         "profile": profile,
         "password": password,
-        "company_user": company_user
+        "company_user": company_user,
+        "booking": booking_count
     }  
 
     if request.method == 'POST':
@@ -113,6 +133,24 @@ def create_booking(request):
     assessment = Assessment.objects.get(id=request.session['assessment_id'])
     assessment.booking = booking
     assessment.save()
+
+    # Retrieve Profile
+    profile = Profile.objects.get(account=request.user)
+
+    subject = "Password Reset Requested"
+    email_template_name = "member/email/booking_email.txt"
+    c = {
+	    'email': request.user.email,
+		'user': profile,
+        'booking': booking,
+        'site_name': 'Vitalio'
+	}
+    email = render_to_string(email_template_name, c)
+                    
+    try:
+        send_mail(subject, email, settings.DEFAULT_FROM_EMAIL , [request.user.email], fail_silently=False)
+    except BadHeaderError:
+        return HttpResponse('Invalid header found.')
 
     messages.info(request, "Your booking has been made")
 
@@ -156,10 +194,12 @@ def admin_add_provider(request):
 
     account_form = AccountCreationForm()
     profile_form = ProfileForm()
+    booking_count = Booking.objects.filter(patient=request.user, isEnded=False).count()
 
     context = {
         "account_form": account_form,
-        "profile_form": profile_form
+        "profile_form": profile_form,
+        "booking": booking_count
     }
 
     if request.method == 'POST':
@@ -205,11 +245,14 @@ def admin_usage_statistics(request):
 
     company = AccountCompany.objects.get(user=request.user)
 
+    booking_count = Booking.objects.filter(patient=request.user, isEnded=False).count()
+
     company_bookings = CompanyBooking.objects.filter(company=company.company, booking__timeslot__day__month=currentMonth).count()
 
     context = {
         "bookings": company_bookings,
-        "month": currentMonth
+        "month": currentMonth,
+        "booking": booking_count
     }
 
     return render(request, "member/usage_statistics.html", context)
