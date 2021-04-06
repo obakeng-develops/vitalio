@@ -1,0 +1,31 @@
+{% extends 'member/assessments/assessment_base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Start Your Assessment {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center d-flex align-items-center">
+        <div class="col-md-8 my-5 py-5">
+            <a class="btn btn-dark my-4" href="{% url 'member_dashboard' %}">Go Back</a>
+            <h1 class="display-5">One more thing and you're done.</h1>
+            <p class="lead">Choose a timeslot that works for you.</p>
+            <br>
+            <form method="POST" action="{% url 'create_booking' %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="timeslotsSelect">Available timeslots</label>
+                        <select class="form-control" id="timeslotsSelect" name="schedule">
+                            {% for schedule in schedules %}
+                            <option value="{{ schedule.pk }}">{{ schedule.day }}, {{ schedule.start_time }} - {{ schedule.end_time }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg mx-3 w-25 shadow">Book</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

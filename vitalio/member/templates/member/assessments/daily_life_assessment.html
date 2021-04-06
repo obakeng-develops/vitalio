@@ -1,0 +1,23 @@
+{% extends 'member/assessments/assessment_base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Start Your Assessment {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center d-flex align-items-center">
+        <div class="col-md-8 my-5 py-5">
+            <a class="btn btn-dark my-4" href="{% url 'member_dashboard' %}">Go Back</a>
+            <h1 class="display-5">How has daily life felt recently?</h1>
+            <p class="lead">Over the past week.</p>
+            <br>
+            <form method="POST">
+                {% csrf_token %}
+                <label class="h4 text-muted">Select one that applies to you.</label>
+                {{form|crispy}}
+                <button class="btn btn-lg btn-primary my-4">Continue</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

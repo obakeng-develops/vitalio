@@ -12,11 +12,13 @@ import os
 from account.models import Account, Profile
 from provider.models import Schedule, Booking, Provider
 from company.models import Company, Location, AccountCompany, CompanyBooking
+from .models import Assessment
 
 # Forms
 from account.forms import ProfileForm, AccountCreationForm
 from provider.forms import ScheduleForm, BookingForm, ProviderForm
 from company.forms import CompanyForm
+from member.forms import AssessmentFeelingForm, DailyLifeAssessmentForm, FocusAssessmentForm, ExpectationAssessmentForm
 
 # Third Party
 from rolepermissions.decorators import has_role_decorator
@@ -107,6 +109,13 @@ def create_booking(request):
     booking.isAccepted = False
     booking.save()
 
+    # Add booking to assessment record
+    assessment = Assessment.objects.get(id=request.session['assessment_id'])
+    assessment.booking = booking
+    assessment.save()
+
+    messages.info(request, "Your booking has been made")
+
     return redirect(reverse("member_dashboard"))
 
 @login_required
@@ -179,7 +188,7 @@ def admin_add_provider(request):
 
             # Add to company
             account_company = AccountCompany()
-            account_company.company = Company.objects.get(pk=2)
+            account_company.company = Company.objects.get(pk=1)
             account_company.user = user
             account_company.save()
 
@@ -204,3 +213,123 @@ def admin_usage_statistics(request):
     }
 
     return render(request, "member/usage_statistics.html", context)
+
+@login_required
+@transaction.atomic
+def start_assessment(request):
+
+    form = AssessmentFeelingForm()
+
+    context = {
+        "form": form
+    }
+
+    if request.POST:
+
+        form = AssessmentFeelingForm(request.POST)
+
+        if form.is_valid():
+
+            profile = Profile.objects.get(account=request.user)
+            
+            # Create Assessment
+            create_assessment = Assessment()
+            create_assessment.user = profile
+            create_assessment.feeling_today = form.cleaned_data["feeling_today"]
+            create_assessment.save()
+
+            request.session['assessment_id'] = create_assessment.id
+
+            return redirect("daily_life_assessment")
+
+
+    return render(request, "member/assessments/start_assessment.html", context)
+
+@login_required
+@transaction.atomic
+def daily_life_assessment(request):
+
+    form = DailyLifeAssessmentForm()
+
+    context = {
+        "form": form
+    }
+
+    if request.POST:
+
+        form = DailyLifeAssessmentForm(request.POST)
+
+        if form.is_valid():
+            
+            # Create Assessment
+            create_assessment = Assessment.objects.get(id=request.session['assessment_id'])
+            create_assessment.daily_life_feeling = form.cleaned_data['daily_life_feeling']
+            create_assessment.save()
+
+            return redirect("focus_area_assessment")
+
+    return render(request, "member/assessments/daily_life_assessment.html", context)
+
+@login_required
+@transaction.atomic
+def focus_area_assessment(request):
+
+    form = FocusAssessmentForm()
+
+    context = {
+        "form": form
+    }
+
+    if request.POST:
+
+        form = FocusAssessmentForm(request.POST)
+
+        if form.is_valid():
+            
+            # Create Assessment
+            create_assessment = Assessment.objects.get(id=request.session['assessment_id'])
+            create_assessment.focus_area = form.cleaned_data['focus_area']
+            create_assessment.save()
+
+            return redirect("expectation_assessment")
+
+    return render(request, "member/assessments/focus_area_assessment.html", context)
+
+@login_required
+@transaction.atomic
+def expectation_assessment(request):
+
+    form = ExpectationAssessmentForm()
+
+    context = {
+        "form": form
+    }
+
+    if request.POST:
+
+        form = ExpectationAssessmentForm(request.POST)
+
+        if form.is_valid():
+            
+            # Create Assessment
+            create_assessment = Assessment.objects.get(id=request.session['assessment_id'])
+            create_assessment.expectation = form.cleaned_data['expectation']
+            create_assessment.save()
+
+            return redirect("add_booking")
+
+    return render(request, "member/assessments/expectation_assessment.html", context)
+
+@login_required
+@transaction.atomic
+def add_booking(request):
+
+    schedules = Schedule.objects.filter(isBooked=False)
+
+    bookings = Booking.objects.filter(patient=request.user, isEnded=False)
+
+    context = {
+        "schedules": schedules
+    }
+
+    return render(request, "member/assessments/add_booking.html", context)

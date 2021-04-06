@@ -6,7 +6,7 @@
 
 <div class="container-fluid">
     <div class="row justify-content-center my-5">
-        <div class="col-md-3">
+        <!-- <div class="col-md-3">
             <div class="card shadow-sm">
                 <div class="card-header bg-white">Your appointments</div>
                 <div class="card-body">
@@ -25,19 +25,25 @@
                     {% endfor %}
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="col-md-5">
+            {% if messages %}
+                            {% for message in messages %}
+                            <div{% if message.tags %} class="alert alert-success"{% endif %}>{{ message }}</div>
+                            {% endfor %}
+            {% endif %}
 
             <h1 class="display-4">Welcome {{ profile.first_name }}</h1>
             <p class="lead">What can we help you with today?</p>
+            <a class="btn btn-primary btn-lg" href="{% url 'start_assessment' %}">Book session</a>
 
-            <div class="card shadow-sm px-4 py-4" style="width: 18rem;">
-                <h1 class="text-center"><i class="fas fa-brain fa-2x my-2"></i></h1>
+            <!-- <div class="card shadow-sm px-4 py-4" style="width: 18rem;"> -->
+                <!-- <h1 class="text-center"><i class="fas fa-brain fa-2x my-2"></i></h1> -->
                 <!-- Modal Trigger button -->
-                <button class="btn btn-primary" data-toggle="modal" data-target="#bookingModal">Book a session</button>
+                <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#bookingModal">Book a session</button> -->
 
                 <!-- Modal -->
-                <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+                <!-- <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -65,8 +71,8 @@
                         </form>
                     </div>
                     </div>
-                </div>
-            </div>
+                </div> -->
+            <!-- </div> -->
         </div>
     </div>
 </div>
