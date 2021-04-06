@@ -1,13 +1,13 @@
 {% extends 'member/assessments/assessment_base.html' %}
 {% load crispy_forms_tags %}
 
-{% block title %} Start Your Assessment {% endblock %}
+{% block title %} Continue Assessment {% endblock %}
 
 {% block content %}
 <div class="container">
     <div class="row justify-content-center d-flex align-items-center">
         <div class="col-md-8 my-5 py-5">
-            <a class="btn btn-dark my-4" href="{% url 'member_dashboard' %}">Go Back</a>
+            <a class="btn btn-dark my-4" href="{% url focus_area_assessment' %}">Go Back</a>
             <h1 class="display-5">What do you expect from your therapy session?</h1>
             <br>
             <form method="POST">
