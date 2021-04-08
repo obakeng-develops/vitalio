@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 ALLOWED_HOSTS = ["*"]
@@ -164,15 +164,13 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 # Email Backend
-EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
+EMAIL_BACKEND = 'anymail.backends.sendgrid.EmailBackend'
 
 DEFAULT_FROM_EMAIL = 'noreply@vitalio.co'
 SERVER_EMAIL = 'noreply@vitalio.co'
 
 ANYMAIL = {
-    "MAILGUN_API_KEY": "2f1b346c0d0a42020238422483cd04dd-e687bab4-a5f15a7f",
-    "MAILGUN_SENDER_DOMAIN": "sandbox65243724be9642888feef739d3996982.mailgun.org",
-    'MAILGUN_API_URL': 'https://api.mailgun.net/v3/',
+    "SENDGRID_API_KEY": os.environ.get("SENDGRID_API_KEY"),
 }
 
 try:

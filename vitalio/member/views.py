@@ -137,7 +137,7 @@ def create_booking(request):
     # Retrieve Profile
     profile = Profile.objects.get(account=request.user)
 
-    subject = "Password Reset Requested"
+    subject = "Session Created"
     email_template_name = "member/email/booking_email.txt"
     c = {
 	    'email': request.user.email,
