@@ -7,9 +7,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.template.loader import render_to_string
 from django.core.mail import send_mail, BadHeaderError
-from django.conf import settings
+
 from datetime import datetime
 import os
+from django.conf import settings
 
 # Models
 from account.models import Account, Profile

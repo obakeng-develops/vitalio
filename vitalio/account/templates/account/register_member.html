@@ -11,16 +11,15 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-md-5">
-            <div class="card px-4 py-4 mt-5">
+            <div class="card px-4 py-4 mt-5 shadow-sm">
                 <h2>Register</h2>
-                <form method="post">
+                <form method="POST">
                     {% csrf_token %}
                     {{form|crispy}}
-                    <input type="submit" value="Register">
+                    <input type="submit" value="Register" class="btn btn-lg btn-success">
                 </form>
-
-                <a href="{% url 'login' %}" class="btn btn-lg btn-primary my-3">Back to login</a>
             </div>
+            <a href="{% url 'login' %}" class="btn btn-lg btn-dark my-3 w-100">Back to login</a>
         </div>
     </div>
 </div>

@@ -119,11 +119,12 @@ def register_member(request):
 
     if request.method == "GET":
         return render(
-            request, "account/register_member.html",
+            request, "account/register_admin.html",
             {"form": AccountCreationForm}
         )
     elif request.method == "POST":
         form = AccountCreationForm(request.POST)
+
         if form.is_valid():
             # Get Form data
             email = form.cleaned_data["email"]
@@ -220,7 +221,7 @@ def password_reset_request(request):
 						send_mail(subject, email, settings.DEFAULT_FROM_EMAIL , [user.email], fail_silently=False)
 					except BadHeaderError:
 						return HttpResponse('Invalid header found.')
-					return redirect ("password_reset_done")
+					return redirect("password_reset_done")
 
 	password_reset_form = PasswordResetForm()
 
