@@ -4,76 +4,84 @@
 {% block title %} vitalio. {% endblock %}
 
 {% block content %}
-    <section class="container-fluid d-flex align-items-center my-5 py-5">
-        <div class="row justify-content-center py-5">
-            <div class="col-md-5">
+    <section class="container d-flex align-items-center my-5 py-5">
+        <div class="row justify-content-center mt-5 pt-3">
+            <div class="col-md-5 mx-3">
                 <div class="my-5">
-                    <h1 class="display-1 font-manrope-bold">Bring Balance To Your Team.</h1>
-                    <p class="lead">Vitalio is an ongoing, proactive telehealth platform that allows employees access to healthcare
-                        services on the web.
+                    <h1 class="display-1 font-manrope-bold">Always With You.</h1>
+                    <p class="lead">Vitalio is an ongoing, proactive telehealth platform that gives your team access to convenient healthcare services over the web.
                     </p>
-                    <a class="btn btn-primary shadow bg-maximum-red-white btn-lg" href="{% url 'demo' %}">Request Demo</a>
+                    <a class="btn btn-primary shadow-lg bg-maximum-red-white btn-lg" href="{% url 'demo' %}">Book a Demo</a>
                 </div>
             </div>
-            <div class="col-md-5 d-none d-lg-block d-sm-none d-md-none">
+            <div class="col-md-5  mx-3 d-none d-lg-block d-sm-none d-md-none">
                 <div class="my-4 align-items-center d-flex justify-content-center">
-                    <img src="{% static 'images/madison.jpg' %}" class="shadow" width="500" height="500">
+                    <img src="{% static 'images/madison.jpg' %}" class="shadow-lg" width="500" height="500">
                 </div>
             </div>
         </div>
     </section>
 
-<section class="container-fluid d-flex align-items-center my-5 py-5">
+<section class="container my-5 py-5">
     <div class="row justify-content-center my-5 py-5">
-        <div class="col-md-10">
-            <h1 class="text-center font-manrope-bold">Big Business Benefits</h1>
-            <div class="card-deck my-5 py-5">
-                <div class="card border-0">
-                  <img class="card-img-top" src="{% static 'images/Croods - Party Time.png' %}" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title text-center font-manrope-bold">ATTRACT TALENT</h5>
-                    <p class="card-text my-5">Businesses that take care of employees stand out in the job market.</p>
-                  </div>
-                </div>
-                <div class="card border-0">
-                  <img class="card-img-top" src="{% static 'images/Hands-Give.png' %}" alt="Card image cap" height="370">
-                  <div class="card-body">
-                    <h5 class="card-title text-center font-manrope-bold">REDUCE HEALTHCARE COSTS</h5>
-                    <p class="card-text my-5">Reduce the total amount spent on medication as part of your group benefits plan.</p>
-                  </div>
-                </div>
-                <div class="card border-0"">
-                  <img class="card-img-top" src="{% static 'images/Humaaans - 3 Characters.png' %}" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title text-center font-manrope-bold">IMPROVED PRODUCTIVITY</h5>
-                    <p class="card-text my-5">Reduce absenteeism, manage workplace stress and improve productivity.</p>
-                  </div>
-                </div>
-            </div>
+        <div class="col-sm-6 col-md-4 d-none d-lg-block d-sm-none d-md-none">
+            <img src="{% static 'images/iPhone-2@2x.png' %}" class="shadow-lg" width="300" height="500">
+        </div>
+        <div class="col-sm-6 col-md-8">
+            <label class="h1 font-manrope"><strong>Fill an assessment</strong></label>
+            <p class="lead">We ask a few questions to identify your needs.</p>
+        </div>
+    </div>
+    <div class="row justify-content-center my-5 py-5">
+        <div class="col-sm-6 col-md-8">
+            <label class="h1 font-manrope"><strong>Book a timeslot.</strong></label>
+            <p class="lead">Find a timeslot that works for you.</p>
+        </div>
+        <div class="col-sm-6 col-md-4 d-none d-lg-block d-sm-none d-md-none">
+            <img src="{% static 'images/iPhone-3@2x.png' %}" class="shadow-lg" width="300" height="500">
+        </div>
+    </div>
+    <div class="row justify-content-center my-5 py-5">
+        <div class="col-sm-6 col-md-4 d-none d-lg-block d-sm-none d-md-none">
+            <img src="{% static 'images/iPhone-4@2x.png' %}" class="shadow-lg" width="300" height="600">
+        </div>
+        <div class="col-sm-6 col-md-8">
+            <label class="h1 font-manrope"><strong>Join a session</strong></label>
+            <p class="lead">Start a session with our qualified therapists.</p>
         </div>
     </div>
 </section>
 
-<section class="container-fluid bg-caribbean-green d-flex align-items-center">
+<section class="container bg-midnight-green rounded">
     <div class="row justify-content-center my-5 py-5">
-        <div class="col-md-4 mx-4 my-5 py-5">
-            <h1 class="display-3 text-white font-manrope-bold">
-                You Want To Take Care Of Your Team. We Get It.
+        <div class="col-md-8">
+            <h1 class="display-4 text-white font-manrope-bold">
+                How much would it cost me to cover my company?
             </h1>
+            <a class="btn btn-lg bg-white" href="{% url 'pricing' %}">See Pricing</a>
         </div>
-        <div class="col-md-4 mx-4 text-white my-5 py-5">
-            <h3 class="font-manrope-bold">Here are the facts.</h3>
-            <div class="my-3">
-                <p class="lead">Work-related stress and major depression, 
-                    burnout and anxiety disorders are costing
-                    SA’s economy an estimated R40.6 billion
-                    a year - equivalent to 2.2 percent of 
-                    gross domestic product.</p>
-                <p class="lead">15% of South African employees miss work every day.</p>
-                <p class="lead">The South African Depression and Anxiety Group (SADAG)
-                    found that one in four workers in South Africa has been diagnosed 
-                    with depression and, as a result, take an average of 18 days a year off work.</p>
-            </div>
+    </div>
+</section>
+
+<section class="container">
+    <div class="row justify-content-center my-5 py-5">
+        <div class="col-md-8 my-5 py-4">
+            <h1 class="display-4 font-manrope-bold">
+                Let your team get better support
+            </h1>
+            <p class="lead">We currently only support video but soon we'll be bringing audio and text.</p>
+        </div>
+    </div>
+</section>
+
+<section class="container bg-caribbean-green rounded mb-5">
+    <div class="row justify-content-center my-5 py-5">
+        <div class="col-md-5">
+            <h1 class="display-4 text-white font-manrope-bold">
+                Book a demo
+            </h1>
+            <p class="lead text-white">To find out how we can better support your organization, book a demo with us.</p>
+            <a class="btn btn-lg bg-midnight-green-white" href="{% url 'demo' %}">Book a Demo</a>
         </div>
     </div>
 </section>

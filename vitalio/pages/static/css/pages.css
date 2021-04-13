@@ -43,14 +43,32 @@ body {
 .bg-midnight-green-white {
     background-color: #073B4C;
     border: 2px solid #073B4C;
+    color: #FFFFFF;
+}
+.bg-midnight-green-white:hover {
+    background-color: #073B4C;
+    border: 2px solid #073B4C;
+    color: #FFFFFF;
 }
 .bg-caribbean-green-white {
     background-color: #06D7A0;
     border: 2px solid #06D7A0;
+    color: #FFFFFF;
+}
+.bg-caribbean-green-white:hover {
+    background-color: #06D7A0;
+    border: 2px solid #06D7A0;
+    color: #FFFFFF;
 }
 .bg-maximum-red-white {
     background-color: #D62828;
     border: 2px solid #D62828;
+    color: #FFFFFF;
+}
+.bg-maximum-red-white:hover {
+    background-color: #D62828;
+    border: 2px solid #D62828;
+    color: #FFFFFF;
 }
 
 /* Font styles */
