@@ -93,9 +93,5 @@ body {
 /* About Page styling */
 .person {
     width:500px;
-    height: 400px;
-}
-.image {
-    width: 150px;
-    height: 150px;
+    height: 200px;
 }
