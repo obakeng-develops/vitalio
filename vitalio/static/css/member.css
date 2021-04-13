@@ -1,0 +1,40 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+  }
+
+  /* Logo */
+.logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+  }
+
+/* Background Styles */
+.bg-midnight-green {
+    background-color: #073B4C;
+    border: 1px solid #073B4C; 
+}
+  .bg-caribbean-green {
+    background-color: #06D7A0;
+    border: 1px solid #06D7A0; 
+}
+  .bg-maximum-red {
+    background-color: #D62828;
+    border: 1px solid #D62828; 
+}
+  .bg-midnight-green-white {
+    background-color: #073B4C;
+    border: 2px solid #073B4C;
+}
+  .bg-caribbean-green-white {
+    background-color: #06D7A0;
+    border: 2px solid #06D7A0;
+}
+  .bg-maximum-red-white {
+    background-color: #D62828;
+    border: 2px solid #D62828;
+}
+  .bg-nav-midnight-green {
+    background-color: #073B4C;
+    color: #ffffff;
+}
