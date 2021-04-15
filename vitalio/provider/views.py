@@ -3,12 +3,14 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from datetime import datetime, date, timedelta
 from django.views import generic
 from django.utils.safestring import mark_safe
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.forms import PasswordChangeForm
 from django.db import transaction
 from django.contrib import messages
 import calendar
 import os
+import environ
 
 # Models 
 from account.models import Profile
@@ -28,10 +30,10 @@ from twilio.jwt.access_token import AccessToken
 from twilio.jwt.access_token.grants import VideoGrant
 
 # Twilio Account Values
-account_sid = os.environ.get('TWILIO_ACCOUNT_SID')
-auth_token = os.environ.get('TWILIO_AUTH_TOKEN')
-api_key_sid = os.environ.get('TWILIO_API_KEY_SID')
-api_key_secret = os.environ.get('TWILIO_API_KEY_SECRET')
+account_sid="ACb4d2387e934ec98773f3fc4732cbce80"
+auth_token="2bdf89f370d340ad3546d27639d45c09"
+api_key_sid="SK413cfa1855c87162baeb39e5c8fbbb65"
+api_key_secret="jIqm631MCt29lIWn8OLd9g1j6DC1ONEc"
 
 @has_role_decorator('provider')
 def provider_dashboard(request):
@@ -154,12 +156,15 @@ def accept_booking(request):
 
     return redirect(reverse("provider_dashboard"))
 
+@login_required
 @transaction.atomic
 def leave_call(request):
 
     if request.POST:
 
         roomcode = request.session.get('booking')
+
+        print(roomcode)
 
         client = Client(account_sid, auth_token)
 

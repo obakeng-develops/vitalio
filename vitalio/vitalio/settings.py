@@ -173,6 +173,12 @@ ANYMAIL = {
     "SENDGRID_API_KEY": os.environ.get("SENDGRID_API_KEY"),
 }
 
+# Twilio
+ACCOUNT_SID = os.environ.get('TWILIO_ACCOUNT_SID')
+AUTH_TOKEN = os.environ.get('TWILIO_AUTH_TOKEN')
+API_KEY_SID = os.environ.get('TWILIO_API_KEY_SID')
+API_KEY_SECRET = os.environ.get('TWILIO_API_KEY_SECRET')
+
 try:
     from .local_settings import *
 except ImportError:

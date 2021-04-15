@@ -36,10 +36,10 @@ from rolepermissions.checkers import has_role
 from vitalio.roles import Provider, Member, Admin
 
 # Twilio Account Values
-account_sid = os.environ.get('TWILIO_ACCOUNT_SID')
-auth_token = os.environ.get('TWILIO_AUTH_TOKEN')
-api_key_sid = os.environ.get('TWILIO_API_KEY_SID')
-api_key_secret = os.environ.get('TWILIO_API_KEY_SECRET')
+account_sid="ACb4d2387e934ec98773f3fc4732cbce80"
+auth_token="2bdf89f370d340ad3546d27639d45c09"
+api_key_sid="SK413cfa1855c87162baeb39e5c8fbbb65"
+api_key_secret="jIqm631MCt29lIWn8OLd9g1j6DC1ONEc"
 
 @login_required
 def member_dashboard(request):
@@ -169,12 +169,12 @@ def leave_call_member(request):
         client = Client(account_sid, auth_token)
 
         # Retrieve company & booking
-        company = Company.objects.get(user=request.user)
+        account_company = AccountCompany.objects.get(user=request.user)
         booking = Booking.objects.get(room_code=roomcode)
 
         # Add the booking to company stats
         company_booking = CompanyBooking()
-        company_booking.company = company
+        company_booking.company = account_company.company
         company_booking.booking = booking
         company_booking.save()
 

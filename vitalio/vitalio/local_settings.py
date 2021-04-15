@@ -6,7 +6,7 @@ import environ
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
@@ -20,6 +20,11 @@ DATABASES = {
         "HOST": "localhost",
     }
 }
+
+ACCOUNT_SID = os.environ.get('TWILIO_ACCOUNT_SID')
+AUTH_TOKEN = os.environ.get('TWILIO_AUTH_TOKEN')
+API_KEY_SID = os.environ.get('TWILIO_API_KEY_SID')
+API_KEY_SECRET = os.environ.get('TWILIO_API_KEY_SECRET')
 
 # Email Backend
 EMAIL_BACKEND = 'anymail.backends.sendgrid.EmailBackend'
