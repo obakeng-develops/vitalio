@@ -3,6 +3,12 @@ body {
     font-weight: 300;
 }
 
+/* Blobs */
+.blob-one {
+    background-image: url('../images/blob-one.svg');
+    background-size: cover;
+}
+
 /* Logo */
 .logo {
     font-family: 'Space Grotesk', sans-serif;
@@ -73,7 +79,7 @@ body {
 
 /* Font styles */
 .font-manrope-bold {
-    font-family: 'Manrope Bold', sans-serif;
+    font-family: 'Manrope', sans-serif;
     font-weight: 700;
 }
 .font-poppins-light {
@@ -83,6 +89,15 @@ body {
 .font-grotesk {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 2em;
+}
+.font-manrope {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 300;
+}
+
+/* Font Colours */
+.text-caribbean {
+    color:#06D7A0;
 }
 
 /* Hover styles */
