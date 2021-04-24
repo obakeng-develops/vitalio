@@ -4,19 +4,19 @@
 {% block title %} vitalio. {% endblock %}
 
 {% block content %}
-    <section class="container d-flex align-items-center my-5 py-5">
-        <div class="row justify-content-center mt-5 pt-3">
-            <div class="col-md-5 mx-3">
+    <section class="container-fluid d-flex align-items-center my-5 py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-5 mx-3 col-sm-12">
                 <div class="my-5">
-                    <h1 class="display-1 font-manrope-bold">Always With You.</h1>
-                    <p class="lead">Vitalio is an ongoing, proactive telehealth platform that gives your team access to convenient healthcare services over the web.
+                    <h1 class="display-4 font-manrope-bold">Give your employees direct video access to healthcare professionals.</h1>
+                    <p class="lead">Vitalio is a virtual healthcare platform that connects your employees to healthcare professionals.
                     </p>
-                    <a class="btn btn-primary shadow-lg bg-maximum-red-white btn-lg" href="{% url 'demo' %}">Book a Demo</a>
+                    <a class="btn btn-primary shadow bg-maximum-red-white btn-lg" href="{% url 'demo' %}">Book a Demo</a>
                 </div>
             </div>
-            <div class="col-md-5  mx-3 d-none d-lg-block d-sm-none d-md-none">
+            <div class="col-md-5 mx-3 d-none d-lg-block d-sm-none d-md-none blob-one">
                 <div class="my-4 align-items-center d-flex justify-content-center">
-                    <img src="{% static 'images/madison.jpg' %}" class="shadow-lg" width="500" height="500">
+                    <img src="{% static 'images/Video_call.svg' %}" width="600">
                 </div>
             </div>
         </div>
@@ -24,64 +24,45 @@
 
 <section class="container my-5 py-5">
     <div class="row justify-content-center my-5 py-5">
-        <div class="col-sm-6 col-md-4 d-none d-lg-block d-sm-none d-md-none">
-            <img src="{% static 'images/iPhone-2@2x.png' %}" class="shadow-lg" width="300" height="500">
+        <label class="h1 text-muted">How it works</label>
+        <p class="lead text-muted">Vitalio helps your employees embrace a culture of well-being and gives them access to the right professionals.</p>
+    </div>
+    <div class="row justify-content-center my-5">
+        <div class="col-sm-6">
+            <img src="{% static 'images/Fill_form.svg' %}" width="400">
         </div>
-        <div class="col-sm-6 col-md-8">
-            <label class="h1 font-manrope"><strong>Fill an assessment</strong></label>
-            <p class="lead">We ask a few questions to identify your needs.</p>
+        <div class="col-sm-6">
+            <label class="h1">We ask a few questions</label>
+            <p class="lead">These questions help us identify your needs.</p>
         </div>
     </div>
     <div class="row justify-content-center my-5 py-5">
-        <div class="col-sm-6 col-md-8">
-            <label class="h1 font-manrope"><strong>Book a timeslot.</strong></label>
-            <p class="lead">Find a timeslot that works for you.</p>
+        <div class="col-sm-6 col">
+            <label class="h1">Choose a timeslot</label>
+            <p class="lead">Pick a time that works for you.</p>
         </div>
-        <div class="col-sm-6 col-md-4 d-none d-lg-block d-sm-none d-md-none">
-            <img src="{% static 'images/iPhone-3@2x.png' %}" class="shadow-lg" width="300" height="500">
+        <div class="col-sm-6">
+            <img src="{% static 'images/Calendar.svg' %}" width="500">
         </div>
     </div>
     <div class="row justify-content-center my-5 py-5">
-        <div class="col-sm-6 col-md-4 d-none d-lg-block d-sm-none d-md-none">
-            <img src="{% static 'images/iPhone-4@2x.png' %}" class="shadow-lg" width="300" height="600">
+        <div class="col-sm-6">
+            <img src="{% static 'images/Everywhere_together.svg' %}" width="400">
         </div>
-        <div class="col-sm-6 col-md-8">
-            <label class="h1 font-manrope"><strong>Join a session</strong></label>
-            <p class="lead">Start a session with our qualified therapists.</p>
+        <div class="col-sm-6">
+            <label class="h1">Join a session</label>
+            <p class="lead">Connect to one of our qualified healthcare professionals.</p>
         </div>
     </div>
 </section>
 
-<section class="container bg-midnight-green rounded">
+<section class="container bg-midnight-green rounded my-5 py-3">
     <div class="row justify-content-center my-5 py-5">
-        <div class="col-md-8">
+        <div class="col-sm-10">
             <h1 class="display-4 text-white font-manrope-bold">
-                How much would it cost me to cover my company?
+                How can Vitalio support my team?
             </h1>
-            <a class="btn btn-lg bg-white" href="{% url 'pricing' %}">See Pricing</a>
-        </div>
-    </div>
-</section>
-
-<section class="container">
-    <div class="row justify-content-center my-5 py-5">
-        <div class="col-md-8 my-5 py-4">
-            <h1 class="display-4 font-manrope-bold">
-                Let your team get better support
-            </h1>
-            <p class="lead">We currently only support video but soon we'll be bringing audio and text.</p>
-        </div>
-    </div>
-</section>
-
-<section class="container bg-caribbean-green rounded mb-5">
-    <div class="row justify-content-center my-5 py-5">
-        <div class="col-md-5">
-            <h1 class="display-4 text-white font-manrope-bold">
-                Book a demo
-            </h1>
-            <p class="lead text-white">To find out how we can better support your organization, book a demo with us.</p>
-            <a class="btn btn-lg bg-midnight-green-white" href="{% url 'demo' %}">Book a Demo</a>
+            <a class="btn btn-lg bg-white shadow-lg" href="{% url 'demo' %}">Book a demo</a>
         </div>
     </div>
 </section>

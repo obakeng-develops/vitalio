@@ -1,39 +1,58 @@
 {% load static %}
-<section class="container-fluid footer bg-midnight-green">
-    <div class="row justify-content-center">
-        <div class="col-sm-4 mx-4 my-5 pb-5">
-            <h1 class="display-4 font-manrope-bold logo"><img src="{% static 'images/logo-small.png' %}"></h1>
-            <p class="lead">made with love, in South Africa.</p>
+<section class="container footer my-5 py-5">
+    <div class="row justify-content-center my-5 py-5">
+        <div class="col-sm-4 my-4">
+            <img src="{% static 'images/Logo.svg' %}">
+            <p class="lead text-muted mt-3">made with &#129505; in South Africa.</p>
         </div>
-        <div class="col-sm-2 mx-4 my-5 pb-5">
-            <h4>Company</h4>
-            <ul class="navbar-nav">
-                <a href="{% url 'about' %}" class="footer-link"><li class="navbar-item">About</li></a>
+        <div class="col-sm-2 my-4">
+            <label class="h5 text-caribbean">Company</label>
+            <ul class="nav flex-column font-poppins-light">
+                <li class="nav-item text-dark">
+                  <a class="text-dark" href="{% url 'about' %}">Mission</a>
+                </li>
+                <li class="nav-item text-dark">
+                  Careers
+                </li>
             </ul>
         </div>
-        <div class="col-sm-2 mx-4 my-5 pb-5">
-            <h4>Product</h4>
-            <ul class="navbar-nav">
-                <a href="{% url 'patients' %}" class="footer-link"><li class="navbar-item">For Patients</li></a>
-                <a href="{% url 'business' %}" class="footer-link"><li class="navbar-item">For Business</li></a>
+        <div class="col-sm-2 my-4">
+            <label class="h5 text-caribbean">Resources</label>
+            <ul class="nav flex-column font-poppins-light">
+                <li class="nav-item text-dark">
+                  Blog
+                </li>
             </ul>
         </div>
-        <div class="col-sm-2 mx-4 my-5 pb-5">
-            <h4>Stay In Touch</h4>
-            <ul class="navbar-nav">
-                <li class="navbar-item">hello@vitalio.co</li>
+        <div class="col-sm-2 my-4">
+            <label class="h5 text-caribbean">Social</label>
+            <ul class="nav flex-column font-poppins-light">
+                <li class="nav-item text-dark">
+                    <a class="text-dark" href="https://www.linkedin.com/company/vitalioco"><i class="bi bi-linkedin"></i> LinkedIn</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-2 my-4">
+            <label class="h5 text-caribbean">Contact Us</label>
+            <ul class="nav flex-column font-poppins-light">
+                <li class="nav-item text-dark">
+                    hello@vitalio.co
+                </li>
             </ul>
         </div>
     </div>
-</section>
-
-<section class="container-fluid bg-midnight-green">
     <div class="row justify-content-center">
-        <div class="col-md-11 pt-5 mt-5">
-            <ul class="d-flex">
-                <li class="nav-link text-white">vitalio. &copy; 2021</li>
-                <li class="nav-link text-white">Privacy Policy</li>
-                <li class="nav-link text-white">Terms Of Use</li>
+        <div class="col-md-12 pt-5 mt-5">
+            <ul class="nav flex-inline font-manrope-bold">
+                <li class="nav-item text-dark">
+                    Vitalio &copy; 2021
+                </li>
+                <li class="nav-item mx-5 text-dark">
+                    Privacy Policy
+                </li>
+                <li class="nav-item text-dark">
+                    Terms Of Use
+                </li>
             </ul>
         </div>
     </div>
