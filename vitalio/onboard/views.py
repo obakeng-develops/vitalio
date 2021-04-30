@@ -4,26 +4,35 @@ from django.http import HttpResponse
 from django.db import transaction
 
 # Forms
-from account.forms import ProfileForm
-from company.forms import CompanyForm
+from account.forms import ProfileForm, AddressForm
+from company.forms import OrganizationForm
 from provider.forms import ProviderForm
 
 # Models 
 from .models import Onboard
-from account.models import Profile
-from company.models import Company, AccountCompany
+from account.models import Profile, Address
+from company.models import Organization
 from provider.models import Provider
 
+# Member Onboarding
 def onboard_member(request):
+    """ Regular Member and Team Member onboarding """
 
-    return render(request, "onboard/member/hello.html")
+    profile = Profile.objects.get(account=request.user)
+
+    context = {
+        "profile": profile
+    }
+
+    return render(request, "onboard/member/hello.html", context)
 
 @transaction.atomic
-def onboard_member_profile(request):
+def onboard_member_address(request):
+    """ Regular Member and Team Member address details """
 
     if request.method == 'POST':
 
-        form = ProfileForm(request.POST)
+        form = AddressForm(request.POST)
 
         if form.is_valid():
             # Change their isOnboarded value to true
@@ -31,54 +40,80 @@ def onboard_member_profile(request):
             onboard.isOnboarded = True
             onboard.save()
 
-            # Update their profile
-            user = Profile.objects.get(account=request.user)
-            user.first_name = form.cleaned_data["first_name"]
-            user.last_name = form.cleaned_data["last_name"]
-            user.save()
+            # Retrieve profile
+            profile = Profile.objects.get(account=request.user)
+            profile.save()
+
+            # Update their address
+            address = Address.objects.get(profile=profile)
+            address.line_one = form.cleaned_data['line_one']
+            address.surburb = form.cleaned_data['surburb']
+            address.city = form.cleaned_data['city']
+            address.province = form.cleaned_data['province']
+            address.country = form.cleaned_data['country']
+            address.zip_code = form.cleaned_data['zip_code']
+            address.save()
 
             # Say thank you
             return redirect(reverse("member_dashboard"))
     else:
 
-        form = ProfileForm()
+        form = AddressForm()
         context = {
             "form": form
         }
 
-    return render(request, "onboard/member/profile.html", context)
+    return render(request, "onboard/member/address.html", context)
 
+# Admin Onboarding
 def onboard_admin(request):
-    return render(request, "onboard/admin/hello.html")
+    """ Staff & Team admin onboarding """
+
+    profile = Profile.objects.get(account=request.user)
+
+    context = {
+        "profile": profile
+    }
+
+    return render(request, "onboard/admin/hello.html", context)
 
 @transaction.atomic
-def onboard_admin_profile(request):
+def onboard_admin_address(request):
+    """ Staff & Team Member address details """
 
     if request.method == 'POST':
 
-        form = ProfileForm(request.POST)
+        form = AddressForm(request.POST)
 
         if form.is_valid():
 
+            # Retrieve profile
+            profile = Profile.objects.get(account=request.user)
+
             # Update their profile
-            user = Profile.objects.get(account=request.user)
-            user.first_name = form.cleaned_data["first_name"]
-            user.last_name = form.cleaned_data["last_name"]
-            user.save()
+            address = Address.objects.get(profile=profile)
+            address.line_one = form.cleaned_data["line_one"]
+            address.surburb = form.cleaned_data["surburb"]
+            address.city = form.cleaned_data["city"]
+            address.province = form.cleaned_data["province"]
+            address.country = form.cleaned_data["country"]
+            address.zip_code = form.cleaned_data["zip_code"]
+            address.save()
 
             # Say thank you
-            return redirect(reverse("onboard_admin_company"))
+            return redirect(reverse("member_dashboard"))
     else:
 
-        form = ProfileForm()
+        form = AddressForm()
         context = {
             "form": form
         }
 
-    return render(request, "onboard/admin/profile.html", context)
+    return render(request, "onboard/admin/address.html", context)
 
 @transaction.atomic
 def onboard_admin_company(request):
+    """ Staff & Team admin company details """
 
     if request.method == 'POST':
 
@@ -97,10 +132,10 @@ def onboard_admin_company(request):
             company.save()
 
             # Add user as part of a company
-            account_company = AccountCompany()
-            account_company.company = company
-            account_company.user = request.user
-            account_company.save()
+            # account_company = AccountCompany()
+            # account_company.company = company
+            # account_company.user = request.user
+            # account_company.save()
 
             # Say thank you
             return redirect(reverse("member_dashboard"))
@@ -114,7 +149,9 @@ def onboard_admin_company(request):
 
     return render(request, "onboard/admin/company.html", context)
 
+# Provider Onboarding
 def onboard_provider(request):
+    """ Provider onboarding """
 
     profile = Profile.objects.get(account=request.user)
 
@@ -124,34 +161,10 @@ def onboard_provider(request):
 
     return render(request, "onboard/provider/hello.html", context)
 
-# Removed this because this is done through admin interface
-# @transaction.atomic
-# def onboard_provider_profile(request):
-
-#     if request.method == 'POST':
-
-#         form = ProfileForm(request.POST)
-
-#         if form.is_valid():
-#             # Update their profile
-#             user = Profile.objects.get(account=request.user)
-#             user.first_name = form.cleaned_data["first_name"]
-#             user.last_name = form.cleaned_data["last_name"]
-#             user.save()
-
-#             # Say thank you
-#             return redirect(reverse("onboard_provider_details"))
-#     else:
-
-#         form = ProfileForm()
-#         context = {
-#             "form": form
-#         }
-
-#     return render(request, "onboard/provider/profile.html", context)
 
 @transaction.atomic
 def onboard_provider_details(request):
+    """ Provider details """
 
     form = ProviderForm()
     context = {

@@ -10,22 +10,26 @@
             <h1 class="display-4">Your bookings</h1>
             <div class="card shadow-sm my-3">
                 <div class="card-body">
-                    {% for booking in bookings %}
-                    <div class="media">
-                        <div class="media-body">
-                          <h6 class="mt-0">You have made a booking with {{ booking.timeslot.account.email }} on {{ booking.timeslot.day }} at {{ booking.timeslot.start_time }}</h6>
-                            {% if booking.timeslot.day == date %}
-                            <form method="POST" action="{% url 'test_audio' %}">
-                                {% csrf_token %}
-                                <input type="hidden" name="booking_code" value="{{ booking.room_code }}">
-                                <button class="btn btn-danger" type="submit">Join Room</button>
-                            </form>
-                            {% else %}
-                                <a class="btn shadow-sm btn-dark">Cancel Booking</a>
-                            {% endif %}
+                    {% if booking > 0 %}
+                        {% for booking in bookings %}
+                        <div class="media">
+                            <div class="media-body">
+                            <h6 class="mt-0">You have made a booking with {{ booking.timeslot.account.email }} on {{ booking.timeslot.day }} at {{ booking.timeslot.start_time }}</h6>
+                                {% if booking.timeslot.day == date %}
+                                <form method="POST" action="{% url 'test_audio' %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="booking_code" value="{{ booking.room_code }}">
+                                    <button class="btn btn-danger" type="submit">Join Room</button>
+                                </form>
+                                {% else %}
+                                    <a class="btn shadow-sm btn-dark">Cancel Booking</a>
+                                {% endif %}
+                            </div>
                         </div>
-                    </div>
-                    {% endfor %}
+                        {% endfor %}
+                    {% else %}
+                        <label>You've made no bookings as yet.</label>
+                    {% endif %}
                 </div>
             </div>
         </div>

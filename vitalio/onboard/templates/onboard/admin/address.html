@@ -6,17 +6,18 @@
 {% block content %}
 <div class="container-fluid">
     <div class="row justify-content-center my-5">
-        <div class="col-md-5 my-5 py-5">
+        <div class="col-md-5 my-1">
             <form method="POST">
                 {% csrf_token %}
+                <label class="display-4 my-3 text-white">Enter your personal address.</label>
+                <p class="lead text-white">This is so we can later match you to providers closer to you.</p>
                 <div class="card shadow-sm">
-                    <div class="card-header bg-white text-center">Set up your profile | Step 2 of 2</div>
-                    <div class="card-body">
-                        
+                    <div class="card-header bg-white text-center p-4">Step 2 of 3</div>
+                    <div class="card-body p-4">
                         {{ form|crispy }}
                     </div>
                 </div>
-                <button class="btn btn-primary my-3" type="submit">Finish</button>
+                <button class="btn btn-primary my-3 px-5 bg-maximum-red-white" type="submit">Next</button>
             </form>
         </div>
     </div>

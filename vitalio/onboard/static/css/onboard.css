@@ -2,6 +2,8 @@ body {
     font-family: 'Poppins', sans-serif;
     font-weight: 300;
     background-color: #073B4C;
+    background-image: url("../images/blob-haikei-two.svg");
+    background-size: cover;
 }
 
 /* Background Styles */

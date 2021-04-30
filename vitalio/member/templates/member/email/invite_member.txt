@@ -1,0 +1,12 @@
+{% autoescape off %}
+
+Hello,
+
+{{ user }} has invited you to join as a member at Vitalio.
+
+Use this invite link to register {{ protocol }}://{{ domain }}{% url 'invite_members_register' organization %}
+
+Sincerely,
+The {{site_name}} Team
+
+{% endautoescape %}

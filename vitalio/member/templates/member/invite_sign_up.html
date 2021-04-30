@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Welcome to Vitalio {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center d-flex align-items-center my-5">
+        <div class="col-md-5 my-5">
+            <label class="h1 text-center">Account Settings</label>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="card shadow p-5 my-3 rounded-0">
+                    {{form|crispy}}
+                    <button class="btn btn-lg btn-dark">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

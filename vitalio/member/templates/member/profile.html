@@ -13,13 +13,19 @@
             <div class="nav card shadow-sm px-2 py-2 flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <a class="nav-link active" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Your Profile</a>
                 <a class="nav-link" id="v-pills-password-tab" data-toggle="pill" href="#v-pills-password" role="tab" aria-controls="v-pills-password" aria-selected="false">Password</a>
-                {% if user|has_role:'admin' %}
-                <a class="nav-link" id="v-pills-company-tab" data-toggle="pill" href="#v-pills-company" role="tab" aria-controls="v-pills-company" aria-selected="false">Company Details</a>
+                {% if user.role == 3 or user.role == 8 %}
+                    <a class="nav-link" id="v-pills-company-tab" data-toggle="pill" href="#v-pills-company" role="tab" aria-controls="v-pills-company" aria-selected="false">Company Details</a>
+                    <a class="nav-link" id="v-pills-invite-tab" data-toggle="pill" href="#v-pills-invite" role="tab" aria-controls="v-pills-invite" aria-selected="false">Invite Members</a>
                 {% endif %}
             </div>
         </div>
 
         <div class="col-md-7">
+            {% if messages %}
+                {% for message in messages %}
+                    <div{% if message.tags %} class="alert alert-success"{% endif %}>{{ message }}</div>
+                {% endfor %}
+            {% endif %}
             <div class="tab-content" id="v-pills-tabContent">
                 <!-- start of profile tab -->
                 <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
@@ -56,16 +62,40 @@
                     </form>
                 </div>
                 <!-- end of password tab -->
+                <!-- start of company tab -->
                 <div class="tab-pane fade" id="v-pills-company" role="tabpanel" aria-labelledby="v-pills-company-tab">
                     <div class="card shadow px-4 py-4">
                         <form>
-                            <h6 class="border-bottom py-3">Company Details</h6>
-                            <label class="my-2">{{ company_user.company.company_name }}</label>
+                            <h6 class="border-bottom py-3 h3">Company Details</h6>
+                            <label class="my-2"><strong>Company Name</strong></label><br>
+                            <label class="text-muted">{{ membership.organization.organization_name }}</label>
                             <br>
-                            <label>{{ company_user.company.company_size }} members</label>
+                            {% if subscription.status == 2 %}
+                                <label class="my-2"><strong>Subscription Status</strong></label><br>
+                                <label class="text-muted">{{ subscription.get_subscription_plan_display }}</label>
+                            {% else %}
+                                <label class="my-2"><strong>Subscription</strong></label><br>
+                                <a class="btn rounded-0 btn-dark">Start Subscription</a>
+                            {% endif %}
                         </form>
                     </div>
                 </div>
+                <!-- end of password tab -->
+                <!-- start of invite tab -->
+                <div class="tab-pane fade" id="v-pills-invite" role="tabpanel" aria-labelledby="v-pills-invite-tab">
+                    <div class="card shadow px-4 py-4">
+                        <h6 class="border-bottom py-3 h3">Invite your organization's members</h6>
+                        <form method="post" action="{% url 'invite_members' %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                              <input type="email" class="form-control w-50" name="members" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                              <small id="emailHelp" class="form-text text-muted">You can enter multiple emails separated by commas.</small>
+                            </div>
+                            <button type="submit" class="btn btn-dark rounded-0">Invite</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- end of invite tab -->
             </div>
         </div>
 

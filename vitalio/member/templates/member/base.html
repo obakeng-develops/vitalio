@@ -41,14 +41,14 @@
                     <a class="nav-link text-white" href="{% url 'member_bookings' %}">Bookings</a>
                   </li>
                 {% endif %}
-                {% if user|has_role:'admin' %}
+                {% if user.role == 3 or user.role == 8 %}
                   <li class="nav-item">
                     <a class="nav-link text-white" href="{% url 'admin_usage_statistics' %}">Usage</a>
                   </li>
-                  {% if company.company.company_name == 'Vitalio' %}
-                  <li class="nav-item">
-                    <a class="nav-link text-white" href="{% url 'admin_add_provider' %}">Add Provider</a>
-                  </li>
+                  {% if membership.organization.organization_name == 'Vitalio' %}
+                    <li class="nav-item">
+                      <a class="nav-link text-white" href="{% url 'admin_add_provider' %}">Add Provider</a>
+                    </li>
                   {% endif %}
                 {% endif %}
               </ul>

@@ -6,13 +6,13 @@ from django.contrib.auth.admin import UserAdmin
 from .forms import AccountCreationForm, AccountChangeForm
 
 # Models
-from .models import Account, Profile, Address
+from .models import Account, Subscription, Profile, Address
 
 class AccountAdmin(UserAdmin):
     add_form = AccountCreationForm
     form = AccountChangeForm
     model = Account
-    list_display = ('id','email', 'is_staff', 'is_active', 'user_type')
+    list_display = ('id','email', 'is_staff', 'is_active', 'role')
     list_filter = ('email', 'is_staff', 'is_active',)
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
@@ -27,11 +27,21 @@ class AccountAdmin(UserAdmin):
     search_fields = ('email',)
     ordering = ('email',)
 
+class SubscriptionAdmin(admin.ModelAdmin):
+    
+    model = Subscription
+
+    list_display = ('start_date', 'status', 'subscription_owner',)
+    list_filter = ('start_date', 'status', 'subscription_plan',)
+    
+    search_fields = ('start_date',)
+    ordering = ('start_date',)
+
 class ProfileAdmin(admin.ModelAdmin):
 
     model = Profile
 
-    list_display = ('account', 'first_name', 'last_name')
+    list_display = ('account', 'first_name', 'last_name',)
     list_filter = ('account', 'first_name', 'last_name',)
     
     search_fields = ('account',)
@@ -48,5 +58,6 @@ class AddressAdmin(admin.ModelAdmin):
     ordering = ('profile',)
 
 admin.site.register(Account, AccountAdmin)
+admin.site.register(Subscription, SubscriptionAdmin)
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Address, AddressAdmin)

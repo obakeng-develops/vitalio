@@ -6,13 +6,17 @@
 <div class="container-fluid">
     <div class="row justify-content-center my-5">
         <div class="col-md-5 my-5 py-5">
+            <label class="display-4 text-white mb-3">Hello, {{ profile.first_name }}. <br>Welcome to Vitalio.</label>
             <div class="card shadow-sm">
-                <div class="card-header bg-white text-center">Welcome to Vitalio! | Step 1 of 2</div>
-                <div class="card-body">
-                    <h6>Let's start you off by setting up your profile and then you're done.</h6>
+                <div class="card-header bg-white text-center p-4">Step 1 of 2</div>
+                <div class="card-body p-5">
+                    <h6 class="text-center">Thank you for joining Vitalio. We're happy that you're joining us.
+                        <br><br>
+                        We just need to add your address and you're good to go.
+                    </h6>
                 </div>
             </div>
-            <a href="{% url 'onboard_member_profile' %}"><button class="btn btn-primary my-3">Start</button></a>
+            <a href="{% url 'onboard_member_address' %}"><button class="btn btn-primary my-2 w-25">Start</button></a>
         </div>
     </div>
 </div>

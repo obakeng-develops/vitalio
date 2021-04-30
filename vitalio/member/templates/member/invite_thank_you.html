@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Welcome to Vitalio {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center d-flex align-items-center py-5 my-5">
+        <div class="col-md-5 my-5">
+            <label class="h1 text-center">Your set-up is complete!</label>
+            <a class="btn btn-lg rounded-0 btn-dark w-100 my-3" href="{% url 'login' %}">Login</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -4,15 +4,17 @@
 
 {% block content %}
 <div class="container-fluid">
-    <div class="row justify-content-center my-5">
-        <div class="col-md-5 my-5 py-5">
+    <div class="row justify-content-center d-flex align-items-center my-2">
+        <div class="col-md-5 my-5">
+            <label class="display-2 text-white mb-3">Hello, {{ profile.first_name }}.</label>
+            <p class="lead text-white">Thank you for joining Vitalio. We're happy to service you.</p>
             <div class="card shadow-sm">
-                <div class="card-header bg-white text-center p-4">Welcome to Vitalio! | Step 1 of 3</div>
+                <div class="card-header bg-white text-center p-4">Step 1 of 3</div>
                 <div class="card-body">
-                    <h6 class="p-5">Let's start you off by setting up your profile and then you're done.</h6>
+                    <h6 class="p-5 h4">Let's start you off by setting up your profile and then you're done.</h6>
                 </div>
             </div>
-            <a href="{% url 'onboard_admin_profile' %}"><button class="btn btn-primary my-3 px-5 bg-maximum-red-white">Start</button></a>
+            <a href="{% url 'onboard_admin_address' %}"><button class="btn btn-primary my-3 px-5 bg-maximum-red-white">Start</button></a>
         </div>
     </div>
 </div>

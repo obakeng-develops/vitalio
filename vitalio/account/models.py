@@ -13,18 +13,24 @@ from autoslug import AutoSlugField
 from .managers import CustomAccountManager
 
 class Account(AbstractBaseUser, PermissionsMixin):
+    """ User's account  """
 
-    USER_TYPE_CHOICES = [
+    ROLE_CHOICES = [
         (1, "Member"),
-        (2, "Admin"),
-        (3, "Provider"),
+        (2, "Team Member"),
+        (3, "Team Admin"),
+        (4, "Psychologist"),
+        (5, "General Practitioner"),
+        (6, "Counsellor"),
+        (7, "Staff Member"),
+        (8, "Staff Admin"),
     ]
 
     email = m.EmailField(_('email address'), unique=True)
     is_staff = m.BooleanField(default=False)
     is_active = m.BooleanField(default=True)
     date_joined = m.DateTimeField(default=timezone.now)
-    user_type = m.PositiveSmallIntegerField(default=1, choices=USER_TYPE_CHOICES)
+    role = m.PositiveSmallIntegerField(default=1, choices=ROLE_CHOICES)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -33,7 +39,6 @@ class Account(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
-
 
 def generate_profile_id():
 
@@ -47,7 +52,36 @@ def generate_profile_id():
 
     return code
 
+class Subscription(m.Model):
+    """ User's subscription """
+    
+    ACTIVE = 1
+    NOT_ACTIVE = 2
+
+    STATUS_CHOICES = [
+        (ACTIVE, "Active"),
+        (NOT_ACTIVE, "Not Active")
+    ]
+
+    LITE = 1
+    PREMIUM = 2
+
+    PLAN_CHOICES = [
+        (LITE, "Lite"),
+        (PREMIUM, "Premium")
+    ]
+
+    start_date = m.DateTimeField(default=timezone.now)
+    status = m.CharField(max_length=1, choices=STATUS_CHOICES, default=ACTIVE)
+    subscription_owner = m.ForeignKey(Account, on_delete=m.SET_NULL, null=True, blank=True)
+    subscription_plan = m.CharField(max_length=1, choices=PLAN_CHOICES, default=LITE)
+
+    def __str__(self):
+        return str(self.subscription_owner.email) + " (" + self.subscription_plan + ")"
+
 class Profile(m.Model):
+    """ User's profile """
+
     account = m.OneToOneField(Account, on_delete=m.CASCADE, related_name="user_account")
     first_name = m.CharField(max_length=50, blank=True, null=True)
     last_name = m.CharField(max_length=50, blank=True, null=True)
@@ -59,6 +93,8 @@ class Profile(m.Model):
         return str(self.first_name) + " " + str(self.last_name)
 
 class Address(m.Model):
+    """ User's address """
+
     profile = m.ForeignKey(Profile, on_delete=m.CASCADE, related_name="user_address")
     line_one = m.CharField(max_length=50, blank=True, null=True)
     surburb = m.CharField(max_length=50, blank=True, null=True)

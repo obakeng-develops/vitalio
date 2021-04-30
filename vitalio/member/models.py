@@ -9,6 +9,7 @@ from account.models import Profile
 from provider.models import Booking
 
 class Assessment(m.Model):
+    """ User assessment """
 
     LOW = 'LW'
     MEDIUM = 'MD'
@@ -60,3 +61,13 @@ class Assessment(m.Model):
 
     def __str__(self):
         return str(self.date_created)
+
+class Invite(m.Model):
+    """ Track invites """
+
+    email = m.CharField(max_length=128)
+    accepted = m.BooleanField()
+    date_created = m.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.email

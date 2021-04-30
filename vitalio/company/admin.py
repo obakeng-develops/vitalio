@@ -2,17 +2,17 @@
 from django.contrib import admin
 
 # Models
-from .models import Company, Location, AccountCompany, Booking, CompanyBooking
+from .models import Organization, Membership, Location, CompanyBooking
 
-class CompanyAdmin(admin.ModelAdmin):
+class OrganizationAdmin(admin.ModelAdmin):
 
-    model = Company
+    model = Organization
 
-    list_display = ('company_name', 'company_size')
-    list_filter = ('company_name')
+    list_display = ('organization_name', 'subscription',)
+    list_filter = ('organization_name',)
     
-    search_fields = ('company_name',)
-    ordering = ('company_name',)
+    search_fields = ('organization_name',)
+    ordering = ('organization_name',)
 
 class CompanyBookingAdmin(admin.ModelAdmin):
 
@@ -22,10 +22,19 @@ class CompanyBookingAdmin(admin.ModelAdmin):
     list_filter = ('company',)
     
     search_fields = ('company',)
-    ordering = ('cmopany',)
+    ordering = ('company',)
+
+class MembershipAdmin(admin.ModelAdmin):
+    
+    model = Membership
+
+    list_display = ('organization', 'user')
+    list_filter = ('organization',)
+    
+    search_fields = ('organization',)
+    ordering = ('organization',)
 
 
-admin.site.register(Company)
-admin.site.register(Location)
-admin.site.register(AccountCompany)
-admin.site.register(CompanyBooking)
+admin.site.register(Organization, OrganizationAdmin)
+admin.site.register(Membership, MembershipAdmin)
+admin.site.register(CompanyBooking, CompanyBookingAdmin)
