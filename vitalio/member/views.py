@@ -48,19 +48,36 @@ api_key_secret="jIqm631MCt29lIWn8OLd9g1j6DC1ONEc"
 def member_dashboard(request):
     """ Member's Dashboard """
 
-    profile = Profile.objects.get(account=request.user)
+    account = Account.objects.get(email=request.user.email)
 
-    membership = Membership.objects.get(user=request.user)
+    if account.role == 2 or account.role == 7:
 
-    bookings = Booking.objects.filter(patient=request.user, isEnded=False).count()
+        profile = Profile.objects.get(account=request.user)
 
-    context = {
-        "profile": profile,
-        "booking": bookings,
-        "membership": membership
-    }
+        membership = Membership.objects.get(user=request.user)
 
-    return render(request, "member/dashboard.html", context)
+        bookings = Booking.objects.filter(patient=request.user, isEnded=False).count()
+
+        context = {
+            "profile": profile,
+            "booking": bookings,
+            "membership": membership
+        }
+
+        return render(request, "member/dashboard.html", context)
+    
+    if account.role == 1:
+    
+        profile = Profile.objects.get(account=request.user)
+
+        bookings = Booking.objects.filter(patient=request.user, isEnded=False).count()
+
+        context = {
+            "profile": profile,
+            "booking": bookings
+        }
+
+        return render(request, "member/dashboard.html", context)
 
 @login_required
 def member_bookings(request):
@@ -132,8 +149,8 @@ def member_profile(request):
 
         return render(request, "member/profile.html", context)
 
-    # For Admins
-    if account.role == 1 or account.role == 2:
+    # For Team & Staff Members
+    if account.role == 2 or account.role == 7:
 
         # Retrieve Profile
         profile = Profile.objects.get(account=request.user)
@@ -153,6 +170,46 @@ def member_profile(request):
             "form": form,
             "membership": membership,
             "profile": profile,
+            "password": password,
+            "booking": booking_count
+        }  
+
+        if request.method == 'POST':
+
+            form = ProfileForm(request.POST, instance=request.user)
+
+            if form.is_valid():
+                # Update User Profile
+                profile = Profile.objects.get(account=request.user)
+                profile.first_name = form.cleaned_data["first_name"]
+                profile.last_name = form.cleaned_data["last_name"]
+                profile.save()
+
+                return redirect(reverse('member_profile'))  
+
+        return render(request, "member/profile.html", context)
+
+    # For Members
+    if account.role == 1:
+
+        # Retrieve Profile
+        profile = Profile.objects.get(account=request.user)
+
+        # Retrieve subscription
+        subscription = Subscription.objects.get(subscription_owner=request.user)
+
+        # Filter the bookings
+        booking_count = Booking.objects.filter(patient=request.user, isEnded=False).count()
+
+        # Retrieve the profile
+        form = ProfileForm(instance=profile)
+
+        password = PasswordChangeForm(request.user)
+
+        context = {
+            "form": form,
+            "profile": profile,
+            "subscription": subscription,
             "password": password,
             "booking": booking_count
         }  

@@ -3,7 +3,7 @@ from django.urls import include, path
 from django.contrib.auth import views as auth_views
 
 # Views
-from .views import login_provider, register_admin, register_admin_profile, register_admin_organization, register_admin_organization_location, register_member, register_provider, entry_point, thank_you, change_password, password_reset_request
+from .views import login_provider, register_admin, register_admin_profile, register_admin_organization, register_admin_organization_location, register_member, register_member_profile, register_provider, entry_point, thank_you, change_password, password_reset_request
 
 urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")),
@@ -19,6 +19,7 @@ urlpatterns = [
 
     # Member Registration URLS
     path("register/member", register_member, name="register_member"),
+    path("register/member/profile", register_member_profile, name="register_member_profile"),
 
     # Provider Registration URLS
     path("register/provider", register_provider, name="register_provider"),

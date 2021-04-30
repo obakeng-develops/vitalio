@@ -40,7 +40,7 @@ def entry_point(request):
 
     if onboard.isOnboarded == False and (request.user.role == 3 or request.user.role == 8):
         return redirect(reverse("onboard_admin"))
-    if onboard.isOnboarded == False and request.user.role == 2:
+    if onboard.isOnboarded == False and (request.user.role == 2 or request.user.role == 1 or request.user.role == 7):
         return redirect(reverse("onboard_member"))
 
 # Login page for Providers
@@ -211,12 +211,12 @@ def register_company_member(request):
 
     return render(request, "account/register_member_company.html", context)
 
-@transaction.atomic
 def register_member(request):
+    """ Register members """
 
     if request.method == "GET":
         return render(
-            request, "account/register_admin.html",
+            request, "account/register_member.html",
             {"form": AccountCreationForm}
         )
     elif request.method == "POST":
@@ -224,17 +224,46 @@ def register_member(request):
 
         if form.is_valid():
             # Get Form data
-            email = form.cleaned_data["email"]
-            password1 = form.cleaned_data["password1"]
-            password2 = form.cleaned_data["password2"]
+            request.session['email'] = form.cleaned_data["email"]
+            request.session['password1'] = form.cleaned_data["password1"]
+
+            return redirect(reverse("register_member_profile"))
+
+@transaction.atomic
+def register_member_profile(request):
+    """ Register member's profile """
+
+    profile = ProfileForm()
+
+    context = {
+        "form": profile
+    }
+
+    if request.POST:
+
+        form = ProfileForm(request.POST)
+
+        if form.is_valid():
 
             # Create New Account
-            user = Account.objects.create_user(email=email, password=password1, user_type='1')
-            user.save()
+            account = Account.objects.create_user(email=request.session['email'], password=request.session['password1'], role='1')
+            account.save()
 
-            assign_role(user, 'member')
+            # Add a subscription for the member
+            subscription = Subscription()
+            subscription.status = 2
+            subscription.subscription_owner = account
+            subscription.save()
 
-            return redirect(reverse("thank_you"))
+            # Update profile
+            profile = Profile.objects.get(account=account)
+            profile.first_name = form.cleaned_data["first_name"]
+            profile.last_name = form.cleaned_data["last_name"]
+            profile.save()
+
+            return redirect("thank_you")
+
+    return render(request, "account/register_member_profile.html", context)
 
 @transaction.atomic
 def register_provider(request):
