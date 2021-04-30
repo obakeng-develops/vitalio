@@ -50,7 +50,7 @@ def member_dashboard(request):
 
     account = Account.objects.get(email=request.user.email)
 
-    if account.role == 2 or account.role == 7:
+    if account.role == 2 or account.role == 3 or account.role == 7 or account.role == 8:
 
         profile = Profile.objects.get(account=request.user)
 

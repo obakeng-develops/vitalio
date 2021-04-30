@@ -40,8 +40,13 @@ def entry_point(request):
 
     if onboard.isOnboarded == False and (request.user.role == 3 or request.user.role == 8):
         return redirect(reverse("onboard_admin"))
+    elif onboard.isOnboarded == True and (request.user.role == 3 or request.user.role == 8):
+        return redirect(reverse("member_dashboard"))
+
     if onboard.isOnboarded == False and (request.user.role == 2 or request.user.role == 1 or request.user.role == 7):
         return redirect(reverse("onboard_member"))
+    elif onboard.isOnboarded == True and (request.user.role == 2 or request.user.role == 1 or request.user.role == 7):
+        return redirect(reverse("member_dashboard"))
 
 # Login page for Providers
 def login_provider(request):
