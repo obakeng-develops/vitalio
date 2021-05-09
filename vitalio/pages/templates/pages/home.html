@@ -4,69 +4,25 @@
 {% block title %} vitalio. {% endblock %}
 
 {% block content %}
-    <section class="container-fluid d-flex align-items-center my-5 py-5">
+    <section class="container d-flex align-items-center mt-4 pt-4">
         <div class="row justify-content-center">
-            <div class="col-md-5 mx-3 col-sm-12">
+            <div class="col mx-3 col-sm-12">
                 <div class="my-5">
-                    <h1 class="display-4 font-manrope-bold">Give your employees direct video access to healthcare professionals.</h1>
-                    <p class="lead">Vitalio is a virtual healthcare platform that connects your employees to healthcare professionals.
+                    <h1 class="display-4 font-manrope-bold">The platform that lets you subscribe to doctors and psychologists.</h1>
+                    <p class="lead text-muted">Vitalio lets you pay as little as R120 per month to direct video and audio access to healthcare professionals.
                     </p>
-                    <a class="btn btn-primary shadow bg-maximum-red-white btn-lg" href="{% url 'demo' %}">Book a Demo</a>
-                </div>
-            </div>
-            <div class="col-md-5 mx-3 d-none d-lg-block d-sm-none d-md-none blob-one">
-                <div class="my-4 align-items-center d-flex justify-content-center">
-                    <img src="{% static 'images/Video_call.svg' %}" width="600">
+                    <form class="form-inline" method="POST" action="{% url 'waitlist' %}">
+                        {% csrf_token %}
+                        <div class="form-group mr-3">
+                            <input type="text" name="waitlist" class="form-control form-control-lg" placeholder="Enter email to get notified"/>
+                        </div>
+                        <button class="btn btn-primary shadow bg-maximum-red-white btn-lg" type="submit">Notify Me</button>
+                    </form>
                 </div>
             </div>
         </div>
     </section>
 
-<section class="container my-5 py-5">
-    <div class="row justify-content-center my-5 py-5">
-        <label class="h1 text-muted">How it works</label>
-        <p class="lead text-muted">Vitalio helps your employees embrace a culture of well-being and gives them access to the right professionals.</p>
-    </div>
-    <div class="row justify-content-center my-5">
-        <div class="col-sm-6 d-none d-lg-block d-sm-none d-md-none">
-            <img src="{% static 'images/Fill_form.svg' %}" width="400">
-        </div>
-        <div class="col-sm-6">
-            <label class="h1">We ask a few questions</label>
-            <p class="lead">These questions help us identify your needs.</p>
-        </div>
-    </div>
-    <div class="row justify-content-center my-5 py-5">
-        <div class="col-sm-6 col">
-            <label class="h1">Choose a timeslot</label>
-            <p class="lead">Pick a time that works for you.</p>
-        </div>
-        <div class="col-sm-6 d-none d-lg-block d-sm-none d-md-none">
-            <img src="{% static 'images/Calendar.svg' %}" width="500">
-        </div>
-    </div>
-    <div class="row justify-content-center my-5 py-5">
-        <div class="col-sm-6 d-none d-lg-block d-sm-none d-md-none">
-            <img src="{% static 'images/Everywhere_together.svg' %}" width="400">
-        </div>
-        <div class="col-sm-6">
-            <label class="h1">Join a session</label>
-            <p class="lead">Connect to one of our qualified healthcare professionals.</p>
-        </div>
-    </div>
-</section>
-
-<section class="container bg-midnight-green rounded my-5 py-3">
-    <div class="row justify-content-center my-5 py-5">
-        <div class="col-sm-10">
-            <h1 class="display-4 text-white font-manrope-bold">
-                How can Vitalio support my team?
-            </h1>
-            <a class="btn btn-lg bg-white shadow-lg" href="{% url 'demo' %}">Book a demo</a>
-        </div>
-    </div>
-</section>
-
-{% include "pages/footer.html" %}
+    {% include 'pages/footer.html' %}
 
 {% endblock %}

@@ -1,0 +1,5 @@
+{% autoescape off %}
+
+You have a new person on your waitlist: {{ email }}
+
+{% endautoescape %}

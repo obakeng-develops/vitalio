@@ -2,7 +2,7 @@
 from django.urls import path
 
 # Views 
-from .views import home, about, pricing, demo, business, patients
+from .views import home, about, pricing, demo, business, patients, waitlist
 
 urlpatterns = [
     path('', home, name="home"),
@@ -10,5 +10,6 @@ urlpatterns = [
     path('pricing', pricing, name="pricing"),
     path('demo', demo, name="demo"),
     path('business', business, name="business"),
-    path('patients', patients, name="patients")
+    path('patients', patients, name="patients"),
+    path("waitlist", waitlist, name="waitlist")
 ]

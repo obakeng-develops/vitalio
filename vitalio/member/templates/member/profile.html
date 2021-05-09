@@ -102,13 +102,102 @@
                 <!-- start of subscription tab -->
                 <div class="tab-pane fade" id="v-pills-subscription" role="tabpanel" aria-labelledby="v-pills-subscription-tab">
                     <div class="card shadow px-4 py-4">
-                        <h6 class="border-bottom py-3 h3">Your subscriptions</h6>
-                        <form method="post">
-                            {% csrf_token %}
-                            {% if subscription.status == 2 %}
-                                <button type="submit" class="btn btn-dark rounded-0">Start subscription</button>
+                        <h6 class="border-bottom py-3 h3">Your subscription</h6>
+                        <form>
+                            <h6 class="my-2"><strong>Plan Details</strong></h6>
+                            <div class="card text-center">
+                              <div class="card-body">
+                                <div class="row" id="plans">
+                                    {% for plan in plans %}
+                                    <div class="col">
+                                        <div class="mb-4">
+                                            <h6>{{ plan.plan_name }}</h6>
+                                            <h5 class="display-4 d-block mb-2 font-weight-normal">R{{plan.plan_amount}}</h5>
+                                            <span class="text-muted text-small">Per Month</span>
+                                        </div>
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                {{ plan.plan_description }}
+                                            </li>
+                                        </ul>
+                                        <div class="custom-control custom-radio d-inline-block">
+                                            <input type="radio" onclick="handleClick(this)" id="plan-radio-{{ plan.id }}" value="{{ plan.plan_code }}" name="customRadio" class="custom-control-input">
+                                            <label class="custom-control-label" for="plan-radio-{{ plan.id }}"></label>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                              </div>
+                            </div>
+
+                            <h6 class="mt-4"><strong>Payment</strong></h6>
+                            
+                            {% if subscription.status == '2' %}
+                                <!-- <a class="btn btn-dark rounded-0" href="{% url 'payment' %}">Add Payment</a> -->
+                                <form >
+                                    <script src="https://js.paystack.co/v1/inline.js"></script>
+                                    <button type="button" class="btn btn-lg btn-dark w-25" onclick="payWithPaystack()">Pay</button>
+                                    <script>
+
+                                        let v = '';
+
+                                        function handleClick(myRadio) {
+                                            v = myRadio.value;
+                                        }
+                                        
+                                        function payWithPaystack(){
+
+                                          var handler = PaystackPop.setup({
+                                            key: 'pk_test_5f64a8f327329e54b4fb36909813ad6e4454a69c',
+                                            email: '{{ user.email }}',
+                                            plan: v,
+                                            channels: ['bank', 'card'],
+                                            metadata: {
+                                               custom_fields: [
+                                                  {
+                                                      display_name: "Full Name",
+                                                      variable_name: "Full Name",
+                                                      value: "{{ profile.first_name }} {{ profile.last_name }}"
+                                                  }
+                                               ]
+                                            },
+                                            callback: function(response){
+                                                alert('successfully subscribed. transaction ref is ' + response.reference);
+                                            },
+                                            onClose: function(){
+                                                alert('window closed');
+                                            }
+                                          });
+
+                                          handler.openIframe();
+                                        }
+                                    </script>
+                                </form>
                             {% else %}
-                                <label>{{ subscription.get_status_display }}</label>
+                                <div class="card">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                    <div class="col-auto">
+                                        <div class="custom-control custom-radio d-inline-block">
+                                        <input type="radio" id="method-radio-2" name="payment-method" class="custom-control-input">
+                                        <label class="custom-control-label" for="method-radio-2"></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <img alt="Image" src="assets/img/logo-payment-amex.svg" class="avatar rounded-0">
+                                    </div>
+                                    <div class="col d-flex align-items-center">
+                                        <span>•••• •••• •••• 9918</span>
+                                        <small class="ml-2">Exp: 02/20</small>
+                                    </div>
+                                    <div class="col-auto">
+                                        <button class="btn btn-sm btn-danger">
+                                        Remove Card
+                                        </button>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
                             {% endif %}
                         </form>
                     </div>

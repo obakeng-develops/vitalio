@@ -5,35 +5,47 @@
 
 {% block content %}
 
-<section class="container-fluid pricing d-flex align-items-center">
+<section class="container pricing d-flex align-items-center">
     <div class="row justify-content-center my-5 py-5">
         <div class="col-md-12">
-            <h1 class="text-center my-5 py-5 display-3 font-manrope">Pick what works best for your employees.</h1>
+            <h1 class="text-center my-5 py-5 display-3 font-manrope">Pick what works for you. <br><span class="display-4">Cancel at any time with no long-term contracts.</span></h1>
         </div>
         
-        <div class="col-md-3 my-4">
-            <div class="card bg-midnight-green shadow rounded-0">
-                <div class="card-header text-center text-dark bg-white py-4 h2">Lite</div>
-                <div class="card-body">
-                    <div class="card-title text-center text-white">from $8.5 a month, per user.</div>
-                    <ul class="list-group font-montserrat list-group-flush">
-                        <li class="list-group-item bg-midnight-green text-center text-white">12 sessions a month per user</li>
-                    </ul>
-                </div>
-                <div class="card-footer bg-white py-5 text-center shadow-sm"><a class="btn btn-primary rounded-0 bg-maximum-red-white" href="{% url 'demo' %}">Request Demo</a></div>
+        <div class="col card p-5 shadow">
+            <div class="mb-4">
+                <h6>Primary Care</h6>
+                <h5 class="display-4 d-block mb-2 font-weight-normal">R120</h5>
+                <span class="text-muted text-small">Per Month</span>
             </div>
+            <ul class="list-unstyled">
+                <li>
+                    Receive direct video/audio access to general practitioners.
+                </li>
+            </ul>
         </div>
-        <div class="col-md-3 my-4">
-            <div class="card bg-midnight-green shadow rounded-0">
-                <div class="card-header text-center text-dark bg-white py-4 h2">Premium</div>
-                <div class="card-body">
-                    <div class="card-title text-center text-white">from $11 a month, per user.</div>
-                    <ul class="list-group font-montserrat list-group-flush">
-                        <li class="list-group-item bg-midnight-green text-white text-center">20 sessions a month per user</li>
-                    </ul>
-                </div>
-                <div class="card-footer text-center bg-white py-5 shadow-sm"><a class="btn btn-primary rounded-0 bg-maximum-red-white" href="{% url 'demo' %}">Request Demo</a></div>
+        <div class="col card p-5 mx-3 shadow">
+            <div class="mb-4">
+                <h6>Mental Health</h6>
+                <h5 class="display-4 d-block mb-2 font-weight-normal">R160</h5>
+                <span class="text-muted text-small">Per Month</span>
             </div>
+            <ul class="list-unstyled">
+                <li>
+                    Receive direct video/audio access to psychologists.
+                </li>
+            </ul>
+        </div>
+        <div class="col card p-5 shadow">
+            <div class="mb-4">
+                <h6>Complete</h6>
+                <h5 class="display-4 d-block mb-2 font-weight-normal">R260</h5>
+                <span class="text-muted text-small">Per Month</span>
+            </div>
+            <ul class="list-unstyled">
+                <li>
+                    Receive direct video/audio access to both psychologists and general practitioners.
+                </li>
+            </ul>
         </div>
     </div>
 </section>

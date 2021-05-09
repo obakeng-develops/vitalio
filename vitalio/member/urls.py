@@ -30,5 +30,6 @@ urlpatterns = [
     path("invite/done", invite_done, name="invite_done"),
     path("invite/<str:organization>", invite_members_register, name="invite_members_register"),
     path("sign-up", invite_sign_up, name="invite_sign_up"),
-    path("sign-up/complete", invite_thank_you, name="invite_thank_you")
+    path("sign-up/complete", invite_thank_you, name="invite_thank_you"),
+
 ]

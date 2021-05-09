@@ -1,0 +1,71 @@
+{% extends 'payment_base.html' %}
+
+{% block title %} Manage Payment Info {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center my-5">
+        <div class="col-md-5 my-5">
+            <label class="h1 text-center mt-5">Edit your payment details</label>
+            <form id="paymentForm">
+                <!-- <div class="p-4">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control rounded-0" id="floatingInput email-address" placeholder="Email Address">
+                        <label for="floatingInput">Email Address</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control rounded-0" id="floatingPassword amount" placeholder="Amount">
+                        <label for="floatingInput">Amount</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control rounded-0" id="floatingPassword first-name" placeholder="First Name">
+                        <label for="floatingSecurity">First Name</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control rounded-0" id="floatingPassword last-name" placeholder="Last Name">
+                        <label for="floatingSecurity">Last Name</label>
+                    </div>
+                    <a class="btn btn-danger btn-lg my-4 w-100 rounded-0 shadow" onclick="payWithPaystack()" type="submit">Save</a>
+                </div> -->
+                <form >
+                    <script src="https://js.paystack.co/v1/inline.js"></script>
+                    <button type="button" class="btn btn-lg btn-dark w-100" onclick="payWithPaystack()"> Pay </button>
+                    <script>
+                        function payWithPaystack(){
+
+                          var handler = PaystackPop.setup({
+
+                            key: 'pk_test_5f64a8f327329e54b4fb36909813ad6e4454a69c',
+                            email: 'obakeng@vitalio.co',
+                            amount: 1000,
+                            plan: "PLN_9h5mkp69dpri8ul",
+                            metadata: {
+                               custom_fields: [
+                                  {
+                                      display_name: "Mobile Number",
+                                      variable_name: "mobile_number",
+                                      value: "+2348012345678"
+                                  }
+                               ]
+                            },
+                            callback: function(response){
+                                alert('successfully subscribed. transaction ref is ' + response.reference);
+                            },
+                            onClose: function(){
+                                alert('window closed');
+                            }
+                            
+                          });
+
+                          handler.openIframe();
+                        }
+                    </script>
+                </form>
+            </form>
+            {{response.data}}
+        </div>
+    </div>
+</div>
+
+<!-- Paystack -->
+{% endblock %}

@@ -15,7 +15,7 @@ import os
 from django.conf import settings
 
 # Models
-from account.models import Account, Profile, Subscription
+from account.models import Account, Profile, Subscription, Plan
 from provider.models import Schedule, Booking, Provider
 from company.models import Organization, Location, CompanyBooking, Membership
 from .models import Assessment
@@ -198,6 +198,9 @@ def member_profile(request):
         # Retrieve subscription
         subscription = Subscription.objects.get(subscription_owner=request.user)
 
+        # Retrieve Plans
+        plans = Plan.objects.all().order_by('plan_amount')
+
         # Filter the bookings
         booking_count = Booking.objects.filter(patient=request.user, isEnded=False).count()
 
@@ -211,7 +214,8 @@ def member_profile(request):
             "profile": profile,
             "subscription": subscription,
             "password": password,
-            "booking": booking_count
+            "booking": booking_count,
+            "plans": plans
         }  
 
         if request.method == 'POST':

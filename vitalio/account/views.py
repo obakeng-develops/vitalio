@@ -33,6 +33,8 @@ from company.models import Organization, Location, Membership
 from rolepermissions.roles import assign_role
 from rolepermissions.checkers import has_role
 from vitalio.roles import Provider, Member, Admin
+from paystackapi.paystack import Paystack
+from paystackapi.plan import Plan
 
 def entry_point(request):
 
@@ -352,3 +354,18 @@ def password_reset_request(request):
 	password_reset_form = PasswordResetForm()
 
 	return render(request=request, template_name="password/password_reset.html", context={"password_reset_form":password_reset_form})
+
+# Payments
+def payment(request):
+    """ Payment page """
+
+    paystack_secret_key = "sk_test_8216e2141912f54d54d0bc612bc5ee0cd16b9742"
+    paystack = Paystack(secret_key=paystack_secret_key)
+
+    response = Plan.list()
+
+    context = {
+        "response": response
+    }
+
+    return render(request, "account/payment.html", context)

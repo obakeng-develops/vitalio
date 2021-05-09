@@ -6,7 +6,7 @@ from django.contrib.auth.admin import UserAdmin
 from .forms import AccountCreationForm, AccountChangeForm
 
 # Models
-from .models import Account, Subscription, Profile, Address
+from .models import Account, Subscription, Profile, Address, Plan, WaitList
 
 class AccountAdmin(UserAdmin):
     add_form = AccountCreationForm
@@ -26,6 +26,16 @@ class AccountAdmin(UserAdmin):
     )
     search_fields = ('email',)
     ordering = ('email',)
+
+class PlanAdmin(admin.ModelAdmin):
+    
+    model = Plan
+
+    list_display = ('plan_name', 'plan_code', 'plan_description',)
+    list_filter = ('plan_name', 'plan_code',)
+    
+    search_fields = ('plan_name',)
+    ordering = ('plan_name',)
 
 class SubscriptionAdmin(admin.ModelAdmin):
     
@@ -58,6 +68,8 @@ class AddressAdmin(admin.ModelAdmin):
     ordering = ('profile',)
 
 admin.site.register(Account, AccountAdmin)
+admin.site.register(Plan, PlanAdmin)
 admin.site.register(Subscription, SubscriptionAdmin)
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Address, AddressAdmin)
+admin.site.register(WaitList)

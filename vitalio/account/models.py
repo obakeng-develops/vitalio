@@ -52,6 +52,18 @@ def generate_profile_id():
 
     return code
 
+class Plan(m.Model):
+    """ Subscription Plan """
+
+    plan_name = m.CharField(max_length=50)
+    plan_amount = m.CharField(max_length=10, null=True)
+    plan_code = m.CharField(max_length=128)
+    plan_description = m.TextField()
+    date_created = m.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.plan_name + " [" + self.plan_code + "]"
+
 class Subscription(m.Model):
     """ User's subscription """
     
@@ -63,18 +75,10 @@ class Subscription(m.Model):
         (NOT_ACTIVE, "Not Active")
     ]
 
-    LITE = 1
-    PREMIUM = 2
-
-    PLAN_CHOICES = [
-        (LITE, "Lite"),
-        (PREMIUM, "Premium")
-    ]
-
     start_date = m.DateTimeField(default=timezone.now)
     status = m.CharField(max_length=1, choices=STATUS_CHOICES, default=ACTIVE)
     subscription_owner = m.ForeignKey(Account, on_delete=m.SET_NULL, null=True, blank=True)
-    subscription_plan = m.CharField(max_length=1, choices=PLAN_CHOICES, default=LITE)
+    subscription_plan = m.ForeignKey(Plan, on_delete=m.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return str(self.subscription_owner.email) + " (" + self.subscription_plan + ")"
@@ -105,3 +109,11 @@ class Address(m.Model):
 
     def __str__(self):
         return str(self.line_one) + ", " + str(self.surburb) + ", " + str(self.city) + ", " + str(self.province) + ", " + str(self.country) + ", " + str(self.zip_code)
+
+class WaitList(m.Model):
+    """ User waitlist """
+
+    email = m.CharField(max_length=80)
+
+    def __str__(self):
+        return self.email
